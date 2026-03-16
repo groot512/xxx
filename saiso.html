@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사이소(Saiso) - Brand Identity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; }
+        .bg-mint { background-color: #00C48C; }
+        .text-mint { color: #00C48C; }
+        .bg-coral { background-color: #FF8C42; }
+        .text-coral { color: #FF8C42; }
+        .bg-cream { background-color: #FFF9F2; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <!-- Hero Section -->
+    <header class="bg-cream py-20 px-6 flex flex-col items-center justify-center min-h-[60vh] text-center border-b border-orange-100 relative overflow-hidden">
+        <!-- Decorative blobs -->
+        <div class="absolute top-[-10%] left-[-5%] w-64 h-64 bg-mint rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+        <div class="absolute top-[20%] right-[-5%] w-72 h-72 bg-coral rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <!-- SVG Symbol -->
+            <div class="mb-8 flex justify-center hover:scale-105 transition-transform duration-300">
+                <svg viewBox="0 0 120 120" class="w-40 h-40 drop-shadow-xl" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Friendly Background -->
+                    <circle cx="60" cy="60" r="54" fill="#FFF9F2" />
+                    
+                    <!-- Shopping Bag Handle (Warm Coral) -->
+                    <path d="M 40 50 V 35 A 20 20 0 0 1 80 35 V 50" fill="none" stroke="#FF8C42" stroke-width="8" stroke-linecap="round"/>
+                    
+                    <!-- Shopping Bag Body (Fresh Mint) -->
+                    <rect x="25" y="45" width="70" height="55" rx="12" fill="#00C48C" />
+                    
+                    <!-- Smile Face inside Bag (Friendly) -->
+                    <circle cx="45" cy="65" r="4" fill="#FFFFFF"/>
+                    <circle cx="75" cy="65" r="4" fill="#FFFFFF"/>
+                    <path d="M 45 75 Q 60 90 75 75" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+                    
+                    <!-- Sparkle (Fresh/New) -->
+                    <path d="M 90 30 L 93 22 L 101 19 L 93 16 L 90 8 L 87 16 L 79 19 L 87 22 Z" fill="#FF8C42" />
+                </svg>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-gray-900 flex items-baseline justify-center">
+                SAISO <span class="text-mint ml-1">.</span>
+                <span class="text-2xl md:text-4xl text-gray-400 font-semibold ml-4 tracking-normal">사이소</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-light text-gray-600 mb-8 tracking-wide mt-2">
+                매일 만나는 신선한 경험, 우리 동네 친근한 마켓
+            </p>
+            <div class="inline-block bg-white px-6 py-3 rounded-full shadow-sm border border-gray-100 text-sm font-semibold text-gray-500 tracking-widest uppercase">
+                Brand Identity Guidelines
+            </div>
+        </div>
+    </header>
+
+    <!-- Brand Story & Core Values -->
+    <section class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <span class="w-8 h-1 bg-coral mr-4 rounded-full"></span>
+                    Brand Story
+                </h2>
+                <p class="text-lg leading-relaxed text-gray-600 mb-6">
+                    '사이소'는 경상도 사투리 특유의 <strong>정겹고 허물없는 친근함</strong>을 담고 있습니다. 우리는 단순히 물건을 파는 것을 넘어, 소비자가 매일매일 새로운 상품을 발견하는 <strong>'신선한 설렘'</strong>을 제공하고자 합니다.
+                </p>
+                <p class="text-lg leading-relaxed text-gray-600">
+                    심볼 마크는 <strong>'물건을 가득 담는 쇼핑백'</strong>과 <strong>'활짝 웃는 고객의 미소'</strong>를 직관적으로 결합했습니다. 영문 로고를 메인으로 세련됨을 갖추고 한글을 병기하여, 누구에게나 다가가기 쉬운 동네 마켓의 정체성을 잃지 않도록 기획되었습니다.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Value 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-coral bg-opacity-10 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-coral" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">친근함</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">언제든 부담 없이 다가올 수 있는 편안한 이웃 같은 존재.</p>
+                </div>
+                <!-- Value 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-mint bg-opacity-10 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">신선함</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">매일 새롭게 업데이트되는 큐레이션으로 지루할 틈 없는 경험.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Color System -->
+    <section class="bg-white py-20 px-6 border-t border-gray-100">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center">Color Palette</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Primary Mint -->
+                <div class="group rounded-3xl overflow-hidden shadow-sm border border-gray-100">
+                    <div class="h-40 bg-mint flex items-center justify-center transition-transform group-hover:scale-105">
+                        <span class="text-white font-bold tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">FRESH MINT</span>
+                    </div>
+                    <div class="p-6 bg-white">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-bold text-lg">Fresh Mint</h3>
+                            <span class="text-sm font-mono text-gray-400">Primary</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-4">매일매일 새롭게 만나는 신선한 상품과 새로운 경험의 짜릿함을 상징합니다.</p>
+                        <div class="bg-gray-50 p-3 rounded-lg flex justify-between items-center font-mono text-sm text-gray-600">
+                            <span>HEX</span>
+                            <span class="font-semibold text-gray-800">#00C48C</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Coral -->
+                <div class="group rounded-3xl overflow-hidden shadow-sm border border-gray-100">
+                    <div class="h-40 bg-coral flex items-center justify-center transition-transform group-hover:scale-105">
+                        <span class="text-white font-bold tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">WARM CORAL</span>
+                    </div>
+                    <div class="p-6 bg-white">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-bold text-lg">Warm Coral</h3>
+                            <span class="text-sm font-mono text-gray-400">Secondary</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-4">'사이소'라는 사투리가 주는 다정함, 소비자와 소통하는 따뜻한 온도를 의미합니다.</p>
+                        <div class="bg-gray-50 p-3 rounded-lg flex justify-between items-center font-mono text-sm text-gray-600">
+                            <span>HEX</span>
+                            <span class="font-semibold text-gray-800">#FF8C42</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Neutral Cream -->
+                <div class="group rounded-3xl overflow-hidden shadow-sm border border-gray-100">
+                    <div class="h-40 bg-cream flex items-center justify-center border-b border-gray-100 transition-transform group-hover:scale-105">
+                        <span class="text-orange-900 font-bold tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">SOFT CREAM</span>
+                    </div>
+                    <div class="p-6 bg-white">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-bold text-lg">Soft Cream</h3>
+                            <span class="text-sm font-mono text-gray-400">Background</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-4">상품과 콘텐츠가 돋보일 수 있도록 부드럽게 감싸주는 베이스 배경 컬러입니다.</p>
+                        <div class="bg-gray-50 p-3 rounded-lg flex justify-between items-center font-mono text-sm text-gray-600">
+                            <span>HEX</span>
+                            <span class="font-semibold text-gray-800">#FFF9F2</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography & Voice -->
+    <section class="py-20 px-6 max-w-6xl mx-auto border-t border-gray-200">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div>
+                <h2 class="text-3xl font-bold mb-8">Typography</h2>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                    <div class="mb-8 border-b border-gray-100 pb-8">
+                        <p class="text-sm text-gray-400 font-bold mb-2 uppercase tracking-widest">Primary Font</p>
+                        <h3 class="text-4xl font-bold mb-2">Pretendard</h3>
+                        <p class="text-gray-500">가독성이 뛰어나고 모던한 느낌을 주는 산세리프 서체를 사용하여 신뢰감을 줍니다.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <span class="w-24 text-sm text-gray-400">ExtraBold</span>
+                            <span class="text-3xl font-extrabold text-gray-800">사이소 특가 오픈</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-sm text-gray-400">SemiBold</span>
+                            <span class="text-xl font-semibold text-gray-800">매일 만나는 새로운 경험</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-sm text-gray-400">Regular</span>
+                            <span class="text-base font-normal text-gray-600">친근한 브랜드 목소리로 다가갑니다.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h2 class="text-3xl font-bold mb-8">Brand Voice</h2>
+                <div class="space-y-6">
+                    <div class="bg-cream p-6 rounded-2xl border-l-4 border-coral">
+                        <h4 class="font-bold text-lg mb-2">1. 친근하지만 무례하지 않게</h4>
+                        <p class="text-gray-600 text-sm">"고객님"이라는 딱딱한 호칭보다는, 마치 단골 가게 사장님처럼 다정하고 편안한 톤앤매너를 유지합니다.</p>
+                    </div>
+                    <div class="bg-[#e6f9f4] p-6 rounded-2xl border-l-4 border-mint">
+                        <h4 class="font-bold text-lg mb-2">2. 생동감 넘치고 명쾌하게</h4>
+                        <p class="text-gray-600 text-sm">신상품의 장점이나 혜택을 돌려 말하지 않고 직관적이고 경쾌한 문장으로 전달합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-12 text-center">
+        <p class="opacity-50 text-sm mb-4">Saiso Brand Identity © 2026</p>
+        <div class="flex justify-center items-center gap-2">
+            <svg class="w-5 h-5 text-mint" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <span class="font-semibold tracking-wide text-sm">Designed by Jarvis</span>
+        </div>
+    </footer>
+
+</body>
+</html>
