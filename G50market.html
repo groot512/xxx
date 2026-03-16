@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오공마켓 B2B/B2C 쇼핑몰</title>
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons (CDN) - 아이콘 라이브러리 -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* 커스텀 폰트 및 추가 스타일이 필요하면 여기에 작성 */
+        body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
+        
+        /* 메가메뉴 Hover 처리 (CSS만으로 구현) */
+        .mega-menu-container { display: none; }
+        .category-wrapper:hover .mega-menu-container { display: flex; }
+    </style>
+</head>
+<body class="bg-white text-[#232A21] pb-20">
+
+    <!-- 1. 기획자 테스트용 데모 컨트롤러 -->
+    <div class="bg-[#232A21] text-white p-2 sticky top-0 z-50 flex flex-col sm:flex-row justify-center items-center gap-4 shadow-md text-sm">
+        <div class="flex items-center gap-2">
+            <i class="ph-fill ph-warning-circle text-[#FF8F00] text-lg"></i>
+            <span class="font-bold text-[#FF8F00]">[오공마켓 HTML 버전] 접속 환경:</span>
+        </div>
+        <div class="flex bg-black/30 rounded p-1" id="userTypeToggle">
+            <button onclick="setUserType('general')" id="btn-general" class="px-3 py-1 rounded transition-colors bg-[#FF8F00] text-white font-bold">
+                👤 일반 회원
+            </button>
+            <button onclick="setUserType('business')" id="btn-business" class="px-3 py-1 rounded transition-colors text-gray-300 hover:text-white">
+                🏪 사업자 회원
+            </button>
+        </div>
+    </div>
+
+    <!-- 2. 최상단 유틸 메뉴 -->
+    <div class="bg-gray-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 py-1.5 flex justify-end gap-4 text-[11px] text-gray-500">
+            <button class="hover:text-[#232A21]">로그인</button>
+            <button class="hover:text-[#232A21]">회원가입</button>
+            <button class="hover:text-[#232A21]">고객센터</button>
+        </div>
+    </div>
+
+    <!-- 3. 헤더 영역 -->
+    <header class="bg-white">
+        <div class="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
+            <!-- 로고 -->
+            <div class="flex items-center gap-2 cursor-pointer mr-8">
+                <div class="bg-[#FF8F00] p-1.5 rounded-full flex items-center justify-center">
+                    <i class="ph-bold ph-shopping-cart text-white text-xl"></i>
+                </div>
+                <h1 class="text-3xl font-extrabold tracking-tight text-[#232A21]">
+                    오공<span class="text-[#FF8F00]">마켓</span>
+                </h1>
+            </div>
+
+            <!-- 검색창 -->
+            <div class="hidden md:flex flex-1 max-w-2xl relative">
+                <input type="text" placeholder="상품을 검색해보세요!" class="w-full bg-gray-100 border-none rounded-full py-3 pl-6 pr-12 focus:outline-none focus:ring-2 focus:ring-[#FF8F00]/30 text-sm">
+                <button class="absolute right-4 top-1/2 -translate-y-1/2 text-[#232A21]">
+                    <i class="ph-bold ph-magnifying-glass text-lg"></i>
+                </button>
+            </div>
+
+            <!-- 우측 아이콘 메뉴 -->
+            <div class="flex items-center gap-6 ml-8">
+                <div class="text-center cursor-pointer group">
+                    <i class="ph ph-user text-3xl mx-auto text-[#232A21] group-hover:text-[#FF8F00] transition-colors"></i>
+                    <span class="text-[11px] mt-1 block font-medium">마이페이지</span>
+                </div>
+                <div class="text-center cursor-pointer group">
+                    <i class="ph ph-truck text-3xl mx-auto text-[#232A21] group-hover:text-[#FF8F00] transition-colors"></i>
+                    <span class="text-[11px] mt-1 block font-medium">주문/배송</span>
+                </div>
+                <div class="text-center cursor-pointer group">
+                    <i class="ph ph-heart text-3xl mx-auto text-[#232A21] group-hover:text-[#FF8F00] transition-colors"></i>
+                    <span class="text-[11px] mt-1 block font-medium">나의 찜</span>
+                </div>
+                <div class="text-center cursor-pointer relative group">
+                    <i class="ph ph-shopping-cart text-3xl mx-auto text-[#232A21] group-hover:text-[#FF8F00] transition-colors"></i>
+                    <span class="absolute -top-1 -right-1 bg-[#FF8F00] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">3</span>
+                    <span class="text-[11px] mt-1 block font-medium">장바구니</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. GNB 및 메가메뉴 -->
+        <div class="border-t border-b border-gray-200 relative">
+            <div class="max-w-7xl mx-auto px-4 flex items-center">
+                
+                <!-- 카테고리 버튼 (CSS Hover 로직) -->
+                <div class="category-wrapper relative">
+                    <button class="flex items-center gap-2 text-[#FF8F00] font-bold px-2 py-4 mr-8">
+                        <i class="ph-bold ph-list text-lg"></i>
+                        카테고리
+                    </button>
+
+                    <!-- 메가 메뉴 드롭다운 -->
+                    <div class="mega-menu-container absolute top-full left-0 w-[1000px] bg-white border border-gray-200 shadow-xl z-40 p-6">
+                        <!-- 카테고리 1 -->
+                        <div class="flex-1 pr-4 border-r border-gray-100">
+                            <h4 class="font-bold text-[#232A21] mb-4 text-sm">농수축산</h4>
+                            <ul class="space-y-3">
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">야채/채소</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">과일</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">쌀/잡곡</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">축산/계란</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">수산/건어물</a></li>
+                            </ul>
+                        </div>
+                        <!-- 카테고리 2 -->
+                        <div class="flex-1 px-4 border-r border-gray-100">
+                            <h4 class="font-bold text-[#232A21] mb-4 text-sm">가공식품</h4>
+                            <ul class="space-y-3">
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">고추장/된장/간장류</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">양념/소스/육수</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">식용유/조미료</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">밀가루/라면/면</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">유제품/냉장/냉동</a></li>
+                            </ul>
+                        </div>
+                        <!-- 카테고리 3 -->
+                        <div class="flex-1 px-4 border-r border-gray-100">
+                            <h4 class="font-bold text-[#232A21] mb-4 text-sm">주방조리용품</h4>
+                            <ul class="space-y-3">
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">소모품/일회용품</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">조리도구</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">식기/밀폐용기</a></li>
+                            </ul>
+                        </div>
+                        <!-- 카테고리 4 -->
+                        <div class="flex-1 px-4 border-r border-gray-100">
+                            <h4 class="font-bold text-[#232A21] mb-4 text-sm">생활용품</h4>
+                            <ul class="space-y-3">
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">주방잡화</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">욕실잡화</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">생활잡화</a></li>
+                            </ul>
+                        </div>
+                        <!-- 카테고리 5 -->
+                        <div class="flex-1 pl-4">
+                            <h4 class="font-bold text-[#232A21] mb-4 text-sm">대용량/박스상품</h4>
+                            <ul class="space-y-3">
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">대용량 농산물</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">대용량 축산물</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">대용량 수산물</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-[#FF8F00] hover:underline">바로장보고</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 메인 GNB 링크들 -->
+                <nav class="hidden md:flex gap-8 font-bold text-[15px] text-[#232A21]">
+                    <a href="#" class="hover:text-[#FF8F00]">홈</a>
+                    <a href="#" class="text-red-500 hover:text-red-600">매장행사</a>
+                    <a href="#" class="hover:text-[#FF8F00]">신상품</a>
+                    <a href="#" class="hover:text-[#FF8F00]">베스트</a>
+                    <a href="#" class="hover:text-[#FF8F00]">이벤트</a>
+                    <a href="#" class="hover:text-[#FF8F00]">외식브랜딩</a>
+                    <a href="#" class="hover:text-[#FF8F00]">레시피</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 5. 메인 콘텐츠 영역 -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        
+        <!-- 메인 배너 영역 -->
+        <div class="bg-[#003D33] rounded-xl p-10 mb-12 flex items-center justify-between text-white overflow-hidden relative shadow-lg">
+            <div class="relative z-10">
+                <span class="inline-block bg-[#FF8F00] text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
+                    신규 사업자 혜택
+                </span>
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-3 leading-tight">
+                    오공마켓 사장님,<br>식자재 원가를 확 낮춰드립니다.
+                </h2>
+                <p class="text-[#6FC320] mb-6 text-sm md:text-base font-medium">
+                    사업자 인증만 하면 전 상품 도매가 적용 + 첫 달 배송비 무료!
+                </p>
+                <button class="bg-white text-[#003D33] font-bold py-3 px-8 rounded-full text-sm hover:bg-gray-100 transition shadow-md">
+                    사업자 회원가입 하기
+                </button>
+            </div>
+            <!-- 장식용 배경 요소 -->
+            <div class="absolute right-0 top-0 w-1/2 h-full bg-[#21A745] opacity-20 skew-x-12 transform origin-bottom"></div>
+            <i class="ph-fill ph-package text-white absolute right-10 -bottom-10 opacity-10" style="font-size: 250px;"></i>
+        </div>
+
+        <!-- 상품 리스트 헤더 -->
+        <div class="flex items-end justify-between mb-6 border-b border-gray-200 pb-3">
+            <div>
+                <h3 class="text-2xl font-extrabold text-[#232A21]">오늘의 오공 특가</h3>
+                <p class="text-sm text-gray-500 mt-1">업소에서 가장 많이 찾는 베스트 상품만 모았습니다.</p>
+            </div>
+        </div>
+
+        <!-- 6. 상품 그리드 (JS로 동적 렌더링됨) -->
+        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- 자바스크립트를 통해 상품이 여기에 삽입됩니다 -->
+        </div>
+    </main>
+    
+    <!-- 7. Footer 영역 -->
+    <footer class="bg-[#003D33] text-white py-12 mt-10">
+        <div class="max-w-7xl mx-auto px-4 text-center text-sm opacity-80">
+            <p class="font-bold text-lg mb-2">오공마켓 (Ogong Market)</p>
+            <p>경상북도 경산시 | 대표: Boss | 사업자등록번호: 123-45-67890</p>
+            <p class="mt-4 text-[#6FC320]">Copyright © OgongMarket. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 자바스크립트 로직 (다중 프라이싱 및 렌더링) -->
+    <script>
+        // 현재 유저 상태 (general 또는 business)
+        let currentUserType = 'general';
+
+        // 상품 데이터
+        const products = [
+            { id: 1, name: '[대용량] 오뚜기 식용유 18L (업소용)', category: '대용량/박스상품', retailPrice: 48000, businessPrice: 42500, unit: 'BOX', badge: '사업자 BEST', imgColor: 'bg-orange-50', iconColor: 'text-[#FF8F00]' },
+            { id: 2, name: '국내산 냉장 삼겹살 구이용 1kg', category: '농수축산', retailPrice: 22000, businessPrice: 18500, unit: 'KG', badge: '특가', imgColor: 'bg-[#232A21]/10', iconColor: 'text-[#232A21]' },
+            { id: 3, name: '식자재용 깐마늘 (대) 1kg', category: '농수축산', retailPrice: 9500, businessPrice: 7200, unit: 'EA', imgColor: 'bg-[#6FC320]/20', iconColor: 'text-[#6FC320]' },
+            { id: 4, name: '[BOX] 롯데 칠성사이다 250ml x 30캔', category: '가공식품', retailPrice: 24000, businessPrice: 19800, unit: 'BOX', badge: '무료배송', imgColor: 'bg-[#21A745]/20', iconColor: 'text-[#21A745]' },
+            { id: 5, name: '업소용 대용량 고추장 14kg', category: '가공식품', retailPrice: 35000, businessPrice: 28000, unit: 'BOX', badge: '', imgColor: 'bg-orange-50', iconColor: 'text-[#FF8F00]' },
+            { id: 6, name: '일회용 위생장갑 500매', category: '주방조리용품', retailPrice: 8000, businessPrice: 5500, unit: 'BOX', badge: '', imgColor: 'bg-[#003D33]/10', iconColor: 'text-[#003D33]' }
+        ];
+
+        // 가격 포맷팅 (콤마 찍기)
+        function formatPrice(price) {
+            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // 유저 타입 변경 및 화면 리렌더링 함수
+        function setUserType(type) {
+            currentUserType = type;
+            
+            // 상단 버튼 스타일 변경
+            const btnGeneral = document.getElementById('btn-general');
+            const btnBusiness = document.getElementById('btn-business');
+            
+            if (type === 'general') {
+                btnGeneral.className = "px-3 py-1 rounded transition-colors bg-[#FF8F00] text-white font-bold";
+                btnBusiness.className = "px-3 py-1 rounded transition-colors text-gray-300 hover:text-white";
+            } else {
+                btnGeneral.className = "px-3 py-1 rounded transition-colors text-gray-300 hover:text-white";
+                btnBusiness.className = "px-3 py-1 rounded transition-colors bg-[#21A745] text-white font-bold";
+            }
+
+            // 상품 목록 다시 그리기
+            renderProducts();
+        }
+
+        // 상품 렌더링 함수
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = ''; // 기존 내용 초기화
+
+            products.forEach(product => {
+                const badgeHtml = product.badge ? `<span class="absolute top-3 left-3 bg-[#FF8F00] text-white text-[11px] font-bold px-2 py-1 rounded-sm z-10">${product.badge}</span>` : '';
+                
+                // 가격 영역 HTML 분기처리
+                let priceHtml = '';
+                if (currentUserType === 'general') {
+                    priceHtml = `
+                        <div class="space-y-2">
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-xl font-bold text-[#232A21]">${formatPrice(product.retailPrice)}</span>
+                                <span class="text-sm text-[#232A21]">원</span>
+                            </div>
+                            <div class="bg-gray-50 rounded-md p-2 flex justify-between items-center border border-gray-200">
+                                <span class="text-[12px] text-gray-500 font-medium">사업자 할인가</span>
+                                <div class="flex items-center text-[#FF8F00] font-bold text-[12px]">
+                                    <i class="ph-fill ph-lock-key mr-1"></i> 로그인 필요
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    const saving = product.retailPrice - product.businessPrice;
+                    priceHtml = `
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2 text-[13px] text-gray-400 line-through">
+                                일반가 ${formatPrice(product.retailPrice)}원
+                            </div>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-[13px] font-bold text-red-500 mr-1">도매가</span>
+                                <span class="text-2xl font-extrabold text-[#232A21]">${formatPrice(product.businessPrice)}</span>
+                                <span class="text-sm text-[#232A21]">원</span>
+                            </div>
+                            <div class="text-[11px] text-[#21A745] font-bold mt-1 bg-[#21A745]/10 inline-block px-2 py-0.5 rounded">
+                                일반가 대비 ${formatPrice(saving)}원 절약!
+                            </div>
+                        </div>
+                    `;
+                }
+
+                const cardHtml = `
+                    <div class="bg-white group flex flex-col">
+                        <div class="aspect-square ${product.imgColor} rounded-xl relative flex items-center justify-center p-6 mb-4 overflow-hidden border border-gray-100">
+                            ${badgeHtml}
+                            <div class="transform group-hover:scale-110 transition-transform duration-300">
+                                <i class="ph-fill ph-package text-5xl ${product.iconColor}"></i>
+                            </div>
+                            <button class="absolute bottom-3 right-3 bg-white/90 p-2 rounded-full shadow-md text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                                <i class="ph-fill ph-heart text-xl"></i>
+                            </button>
+                        </div>
+                        <div class="flex-1 flex flex-col px-1">
+                            <span class="text-[12px] text-gray-400 font-medium mb-1">${product.category}</span>
+                            <h4 class="text-[15px] font-medium text-[#232A21] mb-3 line-clamp-2 h-11 leading-snug">
+                                ${product.name}
+                            </h4>
+                            <div class="mt-auto">
+                                ${priceHtml}
+                            </div>
+                            <button class="w-full mt-4 border border-gray-300 text-[#232A21] hover:bg-[#FF8F00] hover:text-white hover:border-[#FF8F00] font-bold text-sm py-2.5 rounded-lg transition-colors flex justify-center items-center gap-2">
+                                <i class="ph-bold ph-shopping-cart text-base"></i> 담기
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHtml;
+            });
+        }
+
+        // 초기 로딩 시 상품 렌더링
+        window.onload = () => {
+            renderProducts();
+        };
+    </script>
+</body>
+</html>
