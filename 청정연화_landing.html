@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>청정연화 (Clean Lotus) — 불교 기반 B2B2C 커머스 플랫폼 프로젝트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Noto Sans KR', sans-serif; scroll-behavior: smooth; }
+
+        /* ── HERO ── */
+        .hero-section {
+            min-height: 100vh;
+            background-color: #1a0e05;
+            background-image:
+                linear-gradient(160deg, rgba(15,10,3,0.82) 0%, rgba(60,38,8,0.58) 55%, rgba(20,15,5,0.82) 100%),
+                url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center 30%;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center bottom, rgba(180,120,20,0.08) 0%, transparent 70%);
+        }
+        .hero-content { position: relative; z-index: 2; text-align: center; padding: 2rem; }
+
+        /* ── GLASSMORPHISM NAV ── */
+        .glass-nav {
+            background: rgba(18, 14, 8, 0.55);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(212, 160, 23, 0.18);
+            box-shadow: 0 4px 32px rgba(0, 0, 0, 0.28), 0 1px 0 rgba(212,160,23,0.10) inset;
+        }
+        .glass-nav .nav-logo-text {
+            font-weight: 900;
+            font-size: 1.15rem;
+            letter-spacing: 0.04em;
+            color: #fff;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+        }
+        .glass-nav .nav-link-item {
+            color: rgba(255,255,255,0.72);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+        .glass-nav .nav-link-item::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0; right: 0;
+            height: 1.5px;
+            background: #D4A017;
+            transform: scaleX(0);
+            transition: transform 0.25s ease;
+            border-radius: 2px;
+        }
+        .glass-nav .nav-link-item:hover { color: #D4A017; }
+        .glass-nav .nav-link-item:hover::after { transform: scaleX(1); }
+        .glass-nav .nav-link-accent {
+            color: #D4A017;
+            font-weight: 700;
+        }
+        .glass-nav .nav-link-accent::after { transform: scaleX(1); }
+        .glass-mobile {
+            background: rgba(14, 10, 4, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(212,160,23,0.15);
+        }
+
+        /* ── COLORS ── */
+        .text-gold  { color: #D4A017; }
+        .bg-gold    { background-color: #B8860B; }
+        .border-gold { border-color: #D4A017; }
+
+        /* ── CHART ── */
+        .chart-container {
+            position: relative; width: 100%;
+            max-width: 480px; height: 320px; margin: 0 auto;
+        }
+
+        /* ── STAKEHOLDER CARDS ── */
+        .stakeholder-card {
+            transition: all 0.3s ease;
+        }
+        .stakeholder-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.12);
+        }
+
+        /* ── SYNERGY CARDS ── */
+        .synergy-card { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+        .synergy-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.14);
+        }
+
+        /* ── SECTION REVEAL ── */
+        .section-reveal {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .section-reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(36px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce-slow {
+            0%,100% { transform: translateY(0); }
+            50%      { transform: translateY(-8px); }
+        }
+        .anim-1 { animation: fadeInUp 0.8s ease-out 0.0s both; }
+        .anim-2 { animation: fadeInUp 0.8s ease-out 0.2s both; }
+        .anim-3 { animation: fadeInUp 0.8s ease-out 0.4s both; }
+        .anim-4 { animation: fadeInUp 0.8s ease-out 0.6s both; }
+        .anim-bounce { animation: bounce-slow 2.4s ease-in-out infinite; }
+
+        /* ── BUSINESS TABS ── */
+        .tab-btn {
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            background-color: #047857;
+            color: #fff;
+            border-color: #047857;
+        }
+
+        /* ── SCROLLBAR ── */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f5f5f4; }
+        ::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 3px; }
+
+        /* ── BIZ IMAGE ── */
+        .biz-img {
+            width: 100%; height: 210px; object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .biz-img:hover { transform: scale(1.06); }
+        .biz-img-fallback-green { background: linear-gradient(135deg,#d1fae5,#059669); }
+        .biz-img-fallback-amber { background: linear-gradient(135deg,#fef3c7,#d97706); }
+        .biz-img-fallback-blue  { background: linear-gradient(135deg,#dbeafe,#2563eb); }
+    </style>
+</head>
+<body class="antialiased text-stone-800 bg-stone-50">
+
+<!-- ════════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════ -->
+<nav class="glass-nav sticky top-0 z-50 text-white">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+        <div class="flex items-center justify-between h-[62px]">
+
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0
+                            bg-gradient-to-br from-yellow-600 to-yellow-800
+                            shadow-lg shadow-yellow-900/40 ring-1 ring-yellow-600/40
+                            group-hover:ring-yellow-400/60 transition">
+                    <i class="fa-solid fa-dharmachakra text-white text-sm"></i>
+                </div>
+                <div class="flex flex-col leading-tight">
+                    <span class="nav-logo-text">청정연화</span>
+                    <span class="text-yellow-500/80 text-[10px] font-medium tracking-widest uppercase -mt-0.5">
+                        Clean Lotus
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-7">
+                <a href="#overview"     class="nav-link-item">기업 개요</a>
+                <a href="#business"     class="nav-link-item">핵심 사업</a>
+                <a href="#stakeholders" class="nav-link-item">이해관계자</a>
+                <a href="#model"        class="nav-link-item">비즈니스 모델</a>
+                <a href="#synergy"      class="nav-link-item nav-link-accent">바이트랩스 시너지</a>
+                <a href="#roadmap"      class="nav-link-item">로드맵</a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button class="md:hidden text-white/70 hover:text-yellow-400 transition p-2"
+                    onclick="toggleMenu()" aria-label="메뉴">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobile-nav" class="hidden md:hidden glass-mobile px-5 py-5">
+        <div class="flex flex-col gap-4 text-sm">
+            <a href="#overview"     onclick="toggleMenu()" class="text-white/70 hover:text-yellow-400 transition font-medium">기업 개요</a>
+            <a href="#business"     onclick="toggleMenu()" class="text-white/70 hover:text-yellow-400 transition font-medium">핵심 사업</a>
+            <a href="#stakeholders" onclick="toggleMenu()" class="text-white/70 hover:text-yellow-400 transition font-medium">이해관계자</a>
+            <a href="#model"        onclick="toggleMenu()" class="text-white/70 hover:text-yellow-400 transition font-medium">비즈니스 모델</a>
+            <a href="#synergy"      onclick="toggleMenu()" class="text-yellow-400 font-bold">바이트랩스 시너지</a>
+            <a href="#roadmap"      onclick="toggleMenu()" class="text-white/70 hover:text-yellow-400 transition font-medium">로드맵</a>
+        </div>
+    </div>
+</nav>
+
+
+<!-- ════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section class="hero-section">
+    <div class="hero-content max-w-5xl mx-auto px-4">
+
+        <!-- Badge -->
+        <div class="anim-1 inline-flex items-center gap-2 bg-yellow-950/70 border border-yellow-700/50
+                    text-yellow-300 px-5 py-2 rounded-full text-sm font-bold mb-6 backdrop-blur-sm">
+            <i class="fa-solid fa-dharmachakra"></i>
+            대한불교조계종 공식 파트너 · 2026.02.03 계약 체결
+        </div>
+
+        <!-- Title -->
+        <h1 class="anim-2 text-5xl md:text-7xl font-black text-white leading-tight mb-6">
+            주식회사<br>
+            <span class="text-gold">청정연화</span>
+        </h1>
+
+        <!-- Sub -->
+        <p class="anim-3 text-lg md:text-2xl text-stone-200 mb-3 max-w-3xl mx-auto leading-relaxed">
+            1,700년 사찰음식 전통을 현대 비즈니스로 —<br class="hidden md:block">
+            <span class="text-yellow-300 font-semibold">신뢰(Brand) × 경쟁력(Cost)</span>의 결합
+        </p>
+        <p class="anim-3 text-stone-400 text-base mb-10">
+            불교조계종 기반 · B2B2C 하이브리드 폐쇄형 커머스 플랫폼
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="anim-4 flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
+            <a href="#overview"
+               class="bg-yellow-700 hover:bg-yellow-600 text-white font-bold px-8 py-4 rounded-xl
+                      transition shadow-lg shadow-yellow-900/40 text-base">
+                사업 개요 보기
+            </a>
+            <a href="#synergy"
+               class="border border-stone-400 text-stone-200 hover:border-yellow-400
+                      hover:text-yellow-400 font-semibold px-8 py-4 rounded-xl transition text-base">
+                바이트랩스 파트너십 →
+            </a>
+        </div>
+
+        <!-- KPI Badges -->
+        <div class="anim-4 grid grid-cols-3 gap-4 max-w-xl mx-auto">
+            <div class="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-4 text-center">
+                <div class="text-2xl md:text-3xl font-black text-yellow-300">800만</div>
+                <div class="text-stone-300 text-xs mt-1">잠재 신도 타겟</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-4 text-center">
+                <div class="text-2xl md:text-3xl font-black text-yellow-300">1,700년</div>
+                <div class="text-stone-300 text-xs mt-1">사찰음식 전통</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-4 text-center">
+                <div class="text-2xl md:text-3xl font-black text-yellow-300">B2B2C</div>
+                <div class="text-stone-300 text-xs mt-1">하이브리드 모델</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Cue -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-stone-400 anim-bounce">
+        <i class="fa-solid fa-chevron-down text-2xl"></i>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     1. 기업 개요
+════════════════════════════════════════════ -->
+<section id="overview" class="py-20 bg-white section-reveal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <div class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold
+                        rounded-full uppercase tracking-wider mb-4">Company Overview</div>
+            <h2 class="text-4xl font-extrabold text-stone-900">주식회사 청정연화</h2>
+            <p class="mt-4 text-xl text-stone-500 max-w-3xl mx-auto leading-relaxed">
+                1,700년 역사의 사찰음식 전통을 보존하고, 이를 현대적 식문화로 대중화하는
+                <strong>식품 유통 및 플랫폼 전문 기업</strong>입니다.
+                불교 조계종과의 공식 협력 관계를 통해 정통성과 신뢰성을 확보하고 있습니다.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="bg-stone-50 p-6 rounded-2xl border border-stone-100">
+                <div class="w-10 h-10 bg-stone-200 rounded-full flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-user text-stone-500"></i>
+                </div>
+                <div class="text-xs font-semibold text-stone-400 uppercase tracking-wide mb-2">대표이사</div>
+                <div class="text-xl font-bold text-stone-900">임정석</div>
+            </div>
+
+            <div class="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 shadow-sm">
+                <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-handshake text-emerald-600"></i>
+                </div>
+                <div class="text-xs font-semibold text-stone-400 uppercase tracking-wide mb-2">핵심 파트너</div>
+                <div class="text-xl font-bold text-emerald-700">대한불교 조계종</div>
+                <div class="text-xs text-stone-400 mt-1">2026.02.03 공식 계약 체결</div>
+            </div>
+
+            <div class="bg-yellow-50 p-6 rounded-2xl border border-yellow-100">
+                <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-bullseye text-yellow-600"></i>
+                </div>
+                <div class="text-xs font-semibold text-stone-400 uppercase tracking-wide mb-2">핵심 비전</div>
+                <div class="text-xl font-bold text-stone-900">사찰음식 대중화</div>
+                <div class="text-xs text-stone-400 mt-1">전통 보존 &amp; 현대화</div>
+            </div>
+
+            <div class="bg-stone-50 p-6 rounded-2xl border border-stone-100">
+                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-tags text-purple-500"></i>
+                </div>
+                <div class="text-xs font-semibold text-stone-400 uppercase tracking-wide mb-2">주요 키워드</div>
+                <div class="flex flex-wrap gap-2 mt-2">
+                    <span class="text-xs bg-white border border-stone-200 px-2 py-1 rounded text-stone-600">사찰음식HMR</span>
+                    <span class="text-xs bg-white border border-stone-200 px-2 py-1 rounded text-stone-600">비건푸드</span>
+                    <span class="text-xs bg-white border border-stone-200 px-2 py-1 rounded text-stone-600">식자재플랫폼</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     2. 핵심 사업 영역 (이미지 포함)
+════════════════════════════════════════════ -->
+<section id="business" class="py-20 bg-stone-50 section-reveal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <div class="inline-block px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-bold
+                        rounded-full uppercase tracking-wider mb-4">Core Business</div>
+            <h2 class="text-4xl font-extrabold text-stone-900">청정연화 핵심 사업 영역</h2>
+            <p class="mt-4 text-stone-500 max-w-2xl mx-auto">
+                조계종의 전폭적인 지원 아래 추진 중인 3대 핵심 비즈니스 모델입니다.
+            </p>
+        </div>
+
+        <!-- Business Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+
+            <!-- B2B 식자재 -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-100
+                        hover:shadow-xl transition-shadow duration-300">
+                <div class="overflow-hidden biz-img-fallback-green">
+                    <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80"
+                         alt="B2B 식자재 유통 - 신선 채소"
+                         class="biz-img"
+                         onerror="this.style.display='none'">
+                </div>
+                <div class="p-6">
+                    <div class="inline-flex items-center gap-1 px-3 py-1 bg-emerald-100
+                                text-emerald-700 rounded-full text-xs font-bold mb-3">
+                        <i class="fa-solid fa-building-columns"></i> B2B
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">식자재 유통 (조계종 독점)</h3>
+                    <p class="text-stone-500 text-sm leading-relaxed mb-4">
+                        조계종 종단 내 사찰에 신선하고 건강한 식자재를 공급하는
+                        <strong>공식 독점 지위 확보</strong>. 바이트랩스 <em>fresh09</em> 연동으로
+                        발주·물류를 디지털화합니다.
+                    </p>
+                    <ul class="space-y-1.5 text-sm text-stone-600">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-emerald-500 text-xs"></i>
+                            조계종 종정 혜인 스님 공식 계약 (2026.02)
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-emerald-500 text-xs"></i>
+                            B2B 캡티브 마켓 독점 확보 (전국 사찰)
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-emerald-500 text-xs"></i>
+                            fresh09 연동 자동 발주·정산 고도화
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- HMR/밀키트 -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-100
+                        hover:shadow-xl transition-shadow duration-300">
+                <div class="overflow-hidden biz-img-fallback-amber">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80"
+                         alt="HMR 및 밀키트 - 사찰음식"
+                         class="biz-img"
+                         onerror="this.style.display='none'">
+                </div>
+                <div class="p-6">
+                    <div class="inline-flex items-center gap-1 px-3 py-1 bg-amber-100
+                                text-amber-700 rounded-full text-xs font-bold mb-3">
+                        <i class="fa-solid fa-bowl-food"></i> B2C
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">HMR 및 밀키트 개발</h3>
+                    <p class="text-stone-500 text-sm leading-relaxed mb-4">
+                        1,700년 전통 사찰 조리법을 현대적 프리미엄 간편식으로 상품화.
+                        건강식·비건 시장 타겟, <em>daily09</em> B2C 공동구매 채널로 폭발적 세일즈를 창출합니다.
+                    </p>
+                    <ul class="space-y-1.5 text-sm text-stone-600">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-amber-500 text-xs"></i>
+                            전통 사찰음식 레시피 IP 상품화
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-amber-500 text-xs"></i>
+                            프리미엄 비건 푸드 라인업 구축
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-amber-500 text-xs"></i>
+                            daily09 B2C 공동구매 판로 개척
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 디지털 플랫폼 -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-100
+                        hover:shadow-xl transition-shadow duration-300">
+                <div class="overflow-hidden biz-img-fallback-blue">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80"
+                         alt="디지털 유통 플랫폼 - AI 기술"
+                         class="biz-img"
+                         onerror="this.style.display='none'">
+                </div>
+                <div class="p-6">
+                    <div class="inline-flex items-center gap-1 px-3 py-1 bg-blue-100
+                                text-blue-700 rounded-full text-xs font-bold mb-3">
+                        <i class="fa-solid fa-server"></i> Platform
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">디지털 유통 플랫폼 연계</h3>
+                    <p class="text-stone-500 text-sm leading-relaxed mb-4">
+                        바이트랩스의 AI·데이터 플랫폼 기술 이식. 조계종 전용 식자재 플랫폼을 고도화하고
+                        수요 예측·맞춤형 건강식 추천 신규 비즈니스로 확장합니다.
+                    </p>
+                    <ul class="space-y-1.5 text-sm text-stone-600">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-blue-500 text-xs"></i>
+                            AI 기반 수요 예측 &amp; 재고 자동 관리
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-blue-500 text-xs"></i>
+                            조계종 전용 발주 시스템 SaaS화
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-blue-500 text-xs"></i>
+                            데이터 기반 맞춤형 식단 추천 서비스
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Tab Detail -->
+        <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+            <div class="flex flex-col sm:flex-row border-b border-stone-200">
+                <button class="tab-btn active flex-1 py-5 px-6 font-bold text-sm sm:text-base border-b-2
+                               sm:border-b-0 sm:border-r border-stone-200 flex items-center justify-center gap-2"
+                        onclick="switchBizTab('b2b', this)">
+                    <i class="fa-solid fa-building-2"></i> B2B 식자재 유통
+                </button>
+                <button class="tab-btn flex-1 py-5 px-6 font-bold text-sm sm:text-base text-stone-500
+                               bg-stone-50 hover:bg-stone-100 border-b-2 sm:border-b-0 sm:border-r
+                               border-stone-200 flex items-center justify-center gap-2"
+                        onclick="switchBizTab('hmr', this)">
+                    <i class="fa-solid fa-shopping-bag"></i> HMR 및 밀키트
+                </button>
+                <button class="tab-btn flex-1 py-5 px-6 font-bold text-sm sm:text-base text-stone-500
+                               bg-stone-50 hover:bg-stone-100 flex items-center justify-center gap-2"
+                        onclick="switchBizTab('platform', this)">
+                    <i class="fa-solid fa-desktop"></i> 디지털 유통 플랫폼
+                </button>
+            </div>
+            <div id="biz-tab-content"
+                 class="p-8 md:p-12 min-h-[280px] flex items-center justify-center bg-stone-50">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     3. 핵심 이해관계자 R&R
+════════════════════════════════════════════ -->
+<section id="stakeholders" class="py-20 bg-white section-reveal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <div class="inline-block px-3 py-1 bg-purple-100 text-purple-700 text-xs font-bold
+                        rounded-full uppercase tracking-wider mb-4">Stakeholders R&amp;R</div>
+            <h2 class="text-4xl font-extrabold text-stone-900">핵심 이해관계자 (R&amp;R)</h2>
+            <p class="mt-4 text-stone-500 max-w-2xl mx-auto">
+                본 사업의 성공은 4가지 핵심 주체의 명확한 역할 분담에 있습니다.
+                각 카드를 클릭하여 상세 역할을 확인하세요.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="stakeholder-grid">
+            <!-- JS로 주입 -->
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     4. 비즈니스 모델 시뮬레이션
+════════════════════════════════════════════ -->
+<section id="model" class="py-20 bg-gray-900 text-white section-reveal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <div class="inline-block px-3 py-1 bg-blue-900 text-blue-300 text-xs font-bold
+                        rounded-full uppercase tracking-wider mb-4">Business Model</div>
+            <h2 class="text-4xl font-extrabold text-white">비즈니스 모델 시뮬레이션</h2>
+            <p class="mt-4 text-gray-400 max-w-2xl mx-auto">
+                B2B(사찰/기관)와 B2C(신도/폐쇄몰)는 서로 다른 프로세스와 수익 구조를 가집니다.
+                아래 탭을 전환하여 물류 및 자금 흐름을 시뮬레이션해보세요.
+            </p>
+        </div>
+
+        <!-- Toggle -->
+        <div class="flex justify-center mb-10">
+            <div class="bg-gray-800 p-1 rounded-xl inline-flex gap-1">
+                <button id="btn-b2b"
+                        class="px-6 py-3 rounded-lg text-sm font-bold bg-white text-gray-900 shadow transition-all"
+                        onclick="setMode('b2b')">
+                    <i class="fa-solid fa-building-columns mr-2 text-emerald-600"></i>B2B (사찰/기관)
+                </button>
+                <button id="btn-b2c"
+                        class="px-6 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-white transition-all"
+                        onclick="setMode('b2c')">
+                    <i class="fa-solid fa-user-group mr-2"></i>B2C (신도/폐쇄몰)
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Process Flow -->
+            <div class="lg:col-span-2 bg-gray-800 rounded-2xl p-8 border border-gray-700">
+                <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-route text-blue-400"></i> 서비스 프로세스
+                </h3>
+                <div id="process-steps" class="space-y-6"></div>
+            </div>
+
+            <!-- Revenue Chart -->
+            <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 flex flex-col">
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-chart-pie text-emerald-400"></i> 수익 및 정산 구조
+                </h3>
+                <div class="flex-1 flex items-center justify-center bg-gray-900 rounded-xl p-4">
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+                <div id="chart-legend" class="mt-4 text-sm text-gray-400 leading-relaxed"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     5. 플랫폼 시스템 요구사항
+════════════════════════════════════════════ -->
+<section id="system" class="py-20 bg-stone-900 text-white section-reveal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+            <div>
+                <h2 class="text-3xl font-bold text-white">플랫폼 시스템 요구사항</h2>
+                <p class="mt-2 text-stone-400">기존 솔루션(데일리 공구) 기반 커스터마이징 전략</p>
+            </div>
+            <span class="mt-4 md:mt-0 px-4 py-2 bg-blue-600 rounded-lg text-sm font-bold">오픈 목표: 2026 상반기</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-stone-800 p-6 rounded-xl border border-stone-700 hover:border-blue-500 transition">
+                <div class="w-12 h-12 bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-palette text-blue-400 text-xl"></i>
+                </div>
+                <h4 class="text-xl font-bold mb-3">커스터마이징 &amp; UI</h4>
+                <ul class="text-stone-400 text-sm space-y-2">
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-blue-400 text-xs mt-1"></i>종교적 색채(조계종 로고 등) 적용</li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-blue-400 text-xs mt-1"></i>비건/사찰음식 특화 카테고리 재구성</li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-blue-400 text-xs mt-1"></i>B2B 대량 발주 전용 UI 제공</li>
+                </ul>
+            </div>
+            <div class="bg-stone-800 p-6 rounded-xl border border-stone-700 hover:border-emerald-500 transition">
+                <div class="w-12 h-12 bg-emerald-900 rounded-lg flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-database text-emerald-400 text-xl"></i>
+                </div>
+                <h4 class="text-xl font-bold mb-3">데이터 &amp; 회원 연동</h4>
+                <ul class="text-stone-400 text-sm space-y-2">
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-emerald-400 text-xs mt-1"></i>신도증 DB 연동 정회원 인증</li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-emerald-400 text-xs mt-1"></i>데이터 소유권 및 보안 주체 명확화</li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-emerald-400 text-xs mt-1"></i>개인정보보호 규정 준수 프로세스</li>
+                </ul>
+            </div>
+            <div class="bg-stone-800 p-6 rounded-xl border border-stone-700 hover:border-purple-500 transition">
+                <div class="w-12 h-12 bg-purple-900 rounded-lg flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-money-bill-transfer text-purple-400 text-xl"></i>
+                </div>
+                <h4 class="text-xl font-bold mb-3">결제 &amp; 정산 시스템</h4>
+                <ul class="text-stone-400 text-sm space-y-2">
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-purple-400 text-xs mt-1"></i>PG사 연동 (가상계좌, 카드 2.4%)</li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-purple-400 text-xs mt-1"></i>선정산 시스템 (매출채권 유동화)</li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-purple-400 text-xs mt-1"></i>물대 자동 송금 (사고 방지 에스크로)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     6. 전략적 시너지 파트너십
+════════════════════════════════════════════ -->
+<section id="synergy" class="py-20 bg-white section-reveal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <div class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold
+                        rounded-full uppercase tracking-wider mb-4">Strategic Partnership</div>
+            <h2 class="text-4xl font-extrabold text-stone-900">전략적 시너지 파트너십</h2>
+            <p class="mt-4 text-stone-500 max-w-3xl mx-auto">
+                청정연화의 <strong>'사찰음식 정통성 및 조계종 인프라'</strong>와
+                바이트랩스의 <strong>'외식 산업 AI·데이터 IT 인프라'</strong>가 결합하여
+                B2B/B2C 유통 시장을 혁신합니다.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+
+            <!-- 청정연화 Core Assets -->
+            <div class="lg:col-span-4 bg-emerald-900 text-white p-8 rounded-2xl shadow-md
+                        flex flex-col relative overflow-hidden">
+                <div class="absolute -right-8 -bottom-8 w-40 h-40 bg-emerald-800 rounded-full opacity-30"></div>
+                <div class="absolute top-4 right-4 text-6xl text-emerald-800 opacity-40">
+                    <i class="fa-solid fa-dharmachakra"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-6 z-10 flex items-center gap-2">
+                    <i class="fa-solid fa-database text-emerald-400"></i> 청정연화 코어 자산
+                </h3>
+                <ul class="space-y-5 text-emerald-100 z-10 flex-1">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-circle-check text-emerald-400 mr-3 mt-0.5 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-white block mb-1">독점적 콘텐츠 (IP)</strong>
+                            <span class="text-sm opacity-90">대기업이 흉내낼 수 없는 1,700년 정통 사찰음식 레시피 및 비건 브랜드 스토리텔링</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-circle-check text-emerald-400 mr-3 mt-0.5 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-white block mb-1">캡티브 마켓 (Captive Market)</strong>
+                            <span class="text-sm opacity-90">조계종 종단 내 사찰이라는 안정적이고 독점적인 B2B 식자재 납품처 확보</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-circle-check text-emerald-400 mr-3 mt-0.5 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-white block mb-1">폐쇄몰 (Hidden Price)</strong>
+                            <span class="text-sm opacity-90">800만 신도 대상 검증된 회원 전용 폐쇄형 커머스로 가격 경쟁력 유지</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Arrow -->
+            <div class="hidden lg:flex lg:col-span-1 items-center justify-center">
+                <div class="text-blue-500">
+                    <i class="fa-solid fa-right-left text-3xl"></i>
+                </div>
+            </div>
+
+            <!-- BiteLabs Ecosystem -->
+            <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="md:col-span-2">
+                    <a href="https://www.bitelabs.kr/" target="_blank"
+                       class="block bg-slate-900 text-white p-6 rounded-2xl synergy-card group relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-transparent
+                                    opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="flex justify-between items-start z-10 relative">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="p-2 bg-blue-500/20 rounded-lg">
+                                    <i class="fa-solid fa-microchip text-blue-400 text-xl"></i>
+                                </div>
+                                <h3 class="font-bold text-xl">
+                                    BiteLabs
+                                    <span class="text-sm font-normal text-slate-400 ml-1">바이트랩스</span>
+                                </h3>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500"></i>
+                        </div>
+                        <p class="text-sm text-slate-300 mt-2 z-10 relative">
+                            외식 산업의 디지털 혁신을 위한 AI·데이터 플랫폼.
+                            청정연화의 유통/데이터 고도화를 위한 핵심 IT 인프라를 제공합니다.
+                        </p>
+                    </a>
+                </div>
+
+                <a href="https://fresh09.kr/" target="_blank"
+                   class="block bg-white p-6 rounded-2xl border border-stone-200 synergy-card group">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-truck text-blue-600 text-lg"></i>
+                            <h3 class="font-bold text-lg text-stone-800">
+                                fresh09 <span class="text-xs font-normal text-stone-400">ADMIN</span>
+                            </h3>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-stone-400 text-sm"></i>
+                    </div>
+                    <div class="bg-blue-50 text-blue-800 text-xs font-bold px-2 py-1 rounded inline-block mb-3">
+                        B2B 유통 채널
+                    </div>
+                    <p class="text-xs text-stone-600 leading-relaxed">
+                        프랜차이즈 및 식당 대상 식자재 발주/관리 플랫폼.
+                        청정연화의 사찰 식자재를 전국 외식업장으로 유통하는 핵심 채널 역할을 수행합니다.
+                    </p>
+                </a>
+
+                <a href="https://daily09.com/" target="_blank"
+                   class="block bg-white p-6 rounded-2xl border border-stone-200 synergy-card group">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-cart-shopping text-orange-500 text-lg"></i>
+                            <h3 class="font-bold text-lg text-stone-800">
+                                daily09 <span class="text-xs font-normal text-stone-400">SUPER</span>
+                            </h3>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-stone-400 text-sm"></i>
+                    </div>
+                    <div class="bg-orange-50 text-orange-800 text-xs font-bold px-2 py-1 rounded inline-block mb-3">
+                        B2C / 공동구매 채널
+                    </div>
+                    <p class="text-xs text-stone-600 leading-relaxed">
+                        소비자 대상 공동구매 및 상품관리 플랫폼.
+                        청정연화에서 개발한 사찰음식 HMR/밀키트의 폭발적인 B2C 세일즈를 견인합니다.
+                    </p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     7. 시장 포지셔닝
+════════════════════════════════════════════ -->
+<section id="positioning" class="py-20 bg-stone-50 section-reveal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <div class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold
+                        rounded-full uppercase tracking-wider mb-4">Market Analysis</div>
+            <h2 class="text-4xl font-extrabold text-stone-900">시장 포지셔닝 및 경쟁력 우위</h2>
+            <p class="mt-4 text-stone-500 max-w-2xl mx-auto">
+                청정연화 × 바이트랩스 파트너십이 일반 F&B 대기업 대비 가지는 압도적 경쟁 우위입니다.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-8
+                    flex flex-col md:flex-row items-center gap-10">
+            <div class="flex-1 w-full">
+                <div class="chart-container">
+                    <canvas id="positioningChart"></canvas>
+                </div>
+            </div>
+            <div class="flex-1 space-y-5">
+                <h3 class="text-lg font-bold text-stone-900 border-b border-stone-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-500"></i> 분석 인사이트
+                </h3>
+                <div class="space-y-4 text-sm">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-check text-emerald-600 text-xs"></i>
+                        </div>
+                        <div>
+                            <strong class="text-stone-800 block mb-1">압도적 정통성 (Authenticity)</strong>
+                            <p class="text-stone-500">대기업의 트렌드 편승형 사찰식 제품과 달리, 조계종과 직접 납품/개발 계약을 맺어 브랜드의 근본적인 정통성에서 확고한 우위를 점합니다.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-check text-blue-600 text-xs"></i>
+                        </div>
+                        <div>
+                            <strong class="text-stone-800 block mb-1">IT/데이터 시너지 극대화</strong>
+                            <p class="text-stone-500">바이트랩스의 AI 플랫폼과 fresh09·daily09의 확고한 유통망이 결합되어 단순 납품을 넘어 전국구 푸드테크 비즈니스로 확장이 가능합니다.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-check text-amber-600 text-xs"></i>
+                        </div>
+                        <div>
+                            <strong class="text-stone-800 block mb-1">800만 신도 폐쇄몰 네트워크</strong>
+                            <p class="text-stone-500">검증된 회원 기반의 폐쇄형 커머스는 일반 오픈마켓이 진입할 수 없는 독점적 유통 채널을 형성하며 가격 경쟁력을 보호합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     8. 전략 로드맵
+════════════════════════════════════════════ -->
+<section id="roadmap" class="py-20 bg-white section-reveal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <div class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold
+                        rounded-full uppercase tracking-wider mb-4">Roadmap</div>
+            <h2 class="text-4xl font-extrabold text-stone-900">전략 로드맵</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10 relative">
+            <!-- Connector Line (desktop) -->
+            <div class="hidden md:block absolute top-10 left-[12.5%] right-[12.5%]
+                        h-0.5 bg-stone-200 z-0"></div>
+
+            <div class="bg-white border-2 border-stone-200 p-6 rounded-xl shadow relative z-10">
+                <div class="absolute -top-3 left-5 bg-stone-700 text-white px-3 py-1 rounded text-xs font-bold">
+                    Phase 1 · 현재
+                </div>
+                <h4 class="font-bold text-xl text-stone-800 mt-3 mb-2">사업 기획</h4>
+                <p class="text-sm text-stone-500">R&R 확정, 계약 체결, 플랫폼 커스터마이징 범위 설정</p>
+            </div>
+
+            <div class="bg-white border-2 border-stone-200 p-6 rounded-xl shadow relative z-10">
+                <div class="absolute -top-3 left-5 bg-stone-500 text-white px-3 py-1 rounded text-xs font-bold">
+                    Phase 2 · 3월 27일
+                </div>
+                <h4 class="font-bold text-xl text-stone-800 mt-3 mb-2">비건 페스타</h4>
+                <p class="text-sm text-stone-500">사찰 음식 브랜드 공식 런칭, 대규모 홍보 및 신도 유입 프로모션</p>
+            </div>
+
+            <div class="bg-white border-2 border-blue-500 p-6 rounded-xl shadow relative z-10 md:-translate-y-3">
+                <div class="absolute -top-3 left-5 bg-blue-600 text-white px-3 py-1 rounded text-xs font-bold">
+                    Phase 3 · 2026 상반기
+                </div>
+                <h4 class="font-bold text-xl text-blue-600 mt-3 mb-2">시스템 오픈</h4>
+                <p class="text-sm text-stone-500">식자재 B2B 우선 오픈 (수기 발주 병행), 신도 인증 연동 테스트</p>
+            </div>
+
+            <div class="bg-white border-2 border-emerald-200 p-6 rounded-xl shadow relative z-10">
+                <div class="absolute -top-3 left-5 bg-emerald-600 text-white px-3 py-1 rounded text-xs font-bold">
+                    Phase 4 · 2026 하반기
+                </div>
+                <h4 class="font-bold text-xl text-stone-800 mt-3 mb-2">생태계 확장</h4>
+                <p class="text-sm text-stone-500">데이터 기반 큐레이션 고도화, 금융 상품(선정산) 본격 가동</p>
+            </div>
+        </div>
+
+        <!-- Risk Box -->
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-6">
+            <h4 class="font-bold text-amber-800 mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation"></i> 리스크 관리 포인트
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-amber-900">
+                <div>
+                    <strong>신뢰 회복:</strong> 과거 유사 사업 실패/사기 사례 극복을 위한
+                    투명한 정산 시스템 공개가 필수입니다.
+                </div>
+                <div>
+                    <strong>트래픽 확보:</strong> 800만 잠재 모수를 실제 앱 설치/가입으로 전환시키기 위한
+                    초기 '미끼 상품' 및 프로모션이 필요합니다.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer class="bg-stone-950 text-stone-400 py-12 border-t border-stone-800">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <div class="flex items-center justify-center gap-3 mb-4">
+            <div class="w-8 h-8 bg-yellow-700 rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-dharmachakra text-white text-sm"></i>
+            </div>
+            <span class="font-bold text-yellow-400 text-lg">청정연화</span>
+            <span class="text-stone-500 font-bold text-base">×</span>
+            <span class="font-bold text-emerald-400 text-lg">위드동행</span>
+            <span class="text-stone-500 font-bold text-base">×</span>
+            <span class="font-bold text-blue-400 text-lg">바이트랩스</span>
+        </div>
+        <p class="text-sm mb-2">불교조계종 기반 B2B2C 하이브리드 커머스 &amp; 유통 플랫폼 프로젝트 전략 대시보드</p>
+        <p class="text-xs text-stone-600 mt-4">&copy; 2026 Project Clean Lotus. Strategic Analysis Dashboard.</p>
+    </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+// ─── DATA ───────────────────────────────────────
+
+const stakeholders = [
+    {
+        role: "운영 주체 (Operating Body)",
+        entity: "청정연화",
+        icon: "fa-place-of-worship",
+        color: "text-yellow-600",
+        bgColor: "bg-yellow-50",
+        border: "border-yellow-200",
+        desc: "조계종/원불교 공식 계약 주체. 대외적 명분과 브랜드(신뢰)를 제공하며 신도 마케팅의 구심점 역할을 담당합니다.",
+        keyTask: "브랜드 제공, 신도 홍보"
+    },
+    {
+        role: "영업/기획 (Agency)",
+        entity: "위드동행",
+        icon: "fa-handshake",
+        color: "text-emerald-600",
+        bgColor: "bg-emerald-50",
+        border: "border-emerald-200",
+        desc: "전체 사업 구조 설계 및 조율. 종교 단체 대상 영업 및 계약 체결 주도. 실질적인 사업 드라이버 역할.",
+        keyTask: "영업, 계약 체결, 사업 조율"
+    },
+    {
+        role: "플랫폼/공급 (Platform)",
+        entity: "바이트랩스",
+        icon: "fa-microchip",
+        color: "text-blue-600",
+        bgColor: "bg-blue-50",
+        border: "border-blue-200",
+        desc: "daily09/fresh09 솔루션 제공 및 커스터마이징. 대형 유통망과 시스템 연동, AI 기반 플랫폼 운영 및 물류 실행.",
+        keyTask: "시스템 개발, AI 플랫폼, 물류"
+    },
+    {
+        role: "금융 (Finance)",
+        entity: "금융파트너",
+        icon: "fa-coins",
+        color: "text-purple-600",
+        bgColor: "bg-purple-50",
+        border: "border-purple-200",
+        desc: "선정산(매출채권 유동화) 시스템 지원 및 자금 유동성 공급. 결제 대행(PG) 파트너로서 안전한 정산을 담당합니다.",
+        keyTask: "선정산, 자금 지원"
+    }
+];
+
+const bizData = {
+    b2b: {
+        title: "B2B 식자재 유통 (조계종 독점)",
+        iconClass: "fa-building-2",
+        iconColor: "text-emerald-600",
+        desc: "조계종 종단 내 사찰에 신선하고 건강한 식자재를 공급하는 공식적/독점적 지위를 확보하고 있습니다. 단순한 납품을 넘어, 바이트랩스의 <strong>fresh09</strong> 솔루션을 도입하여 사찰 식자재 발주 및 물류 인프라를 혁신적으로 디지털화합니다.",
+        points: ["조계종 종정 혜인 스님과 공식 계약 체결 (2026.02)", "신선 식자재 안정적 공급망 및 B2B 캡티브 마켓 확보", "fresh09 연동을 통한 발주/정산 시스템 고도화"]
+    },
+    hmr: {
+        title: "HMR 및 밀키트 개발 (B2C 확장)",
+        iconClass: "fa-shopping-bag",
+        iconColor: "text-amber-600",
+        desc: "1,700년 역사의 전통 사찰 조리법을 현대적 식문화에 맞춘 프리미엄 밀키트와 간편식(HMR)으로 상품화합니다. 건강식·비건(Vegan) 시장 수요를 타겟으로 하며, 개발된 상품은 <strong>daily09</strong>의 B2C 공동구매 채널을 통해 폭발적인 세일즈를 창출합니다.",
+        points: ["전통 사찰음식 레시피의 대중화 및 IP 상품화", "프리미엄 비건 푸드 라인업 구축", "daily09 플랫폼을 통한 빠르고 넓은 B2C 판로 개척"]
+    },
+    platform: {
+        title: "디지털 유통 플랫폼 연계",
+        iconClass: "fa-desktop",
+        iconColor: "text-blue-600",
+        desc: "기존 파트너십을 넘어, <strong>바이트랩스(BiteLabs)</strong>의 외식 산업 AI·데이터 플랫폼 기술을 이식합니다. 조계종 전용 식자재 플랫폼을 고도화하고, 수집된 데이터를 바탕으로 식자재 수요 예측 및 맞춤형 건강식 추천 등 신규 비즈니스로 확장합니다.",
+        points: ["BiteLabs AI 기술을 활용한 수요 예측 및 재고 관리", "조계종 전용 식자재 발주 시스템의 SaaS화", "데이터 기반의 신규 비즈니스(맞춤형 식단 등) 창출"]
+    }
+};
+
+const businessModelData = {
+    b2b: {
+        steps: [
+            { icon: "fa-gopuram",           title: "주문 (Order)",      desc: "사찰/급식소 관리자가 폐쇄몰에서 대량 식자재 주문 (경쟁력 있는 단가)" },
+            { icon: "fa-network-wired",     title: "중개 (Platform)",   desc: "주문 정보가 API를 통해 공급사(장보고 등) 물류 시스템으로 자동 전송" },
+            { icon: "fa-truck",             title: "직배송 (Delivery)", desc: "중간 유통 단계 없이 공급사 물류센터에서 사찰로 직배송" },
+            { icon: "fa-file-invoice-dollar", title: "정산 (Settlement)", desc: "월 마감 후 일괄 결제 또는 법인카드 결제 (투명한 세무 처리)" }
+        ],
+        chartData: [75, 5, 20],
+        chartLabels: ["식자재 원가 (공급사)", "플랫폼 수수료", "운영 마진"],
+        chartText: "B2B 모델은 '박리다매' 구조입니다. 마진을 최소화하여 사찰에 공급가를 낮추고, 대량 물동량을 통한 수수료 수익을 창출합니다."
+    },
+    b2c: {
+        steps: [
+            { icon: "fa-id-card",           title: "인증 (Access)",    desc: "신도증/DB 연동을 통해 검증된 회원만 접속 가능한 폐쇄몰" },
+            { icon: "fa-basket-shopping",   title: "구매 (Purchase)",  desc: "큐레이션된 '히든 프라이스' 상품을 시중가보다 저렴하게 구매" },
+            { icon: "fa-box-open",          title: "배송 (Delivery)",  desc: "각 가정으로 개별 택배 배송 (공급사 위탁 배송)" },
+            { icon: "fa-money-bill-trend-up", title: "수익 공유 (Profit)", desc: "판매 수익 일부가 사찰/점주에게 커미션으로 정산됨" }
+        ],
+        chartData: [60, 15, 25],
+        chartLabels: ["상품 원가", "셀러/플랫폼 수수료", "운영 마진"],
+        chartText: "B2C 모델은 '고마진/폐쇄성' 구조입니다. 충분한 마진을 확보하여 플랫폼과 사찰(점주)이 수익을 공유합니다."
+    }
+};
+
+// ─── INIT ───────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', () => {
+    initStakeholders();
+    renderBizTab('b2b');
+    setMode('b2b');
+    initRadarChart();
+    initScrollReveal();
+});
+
+// ─── STAKEHOLDERS ────────────────────────────────
+
+function initStakeholders() {
+    const grid = document.getElementById('stakeholder-grid');
+    stakeholders.forEach(s => {
+        const card = document.createElement('div');
+        card.className = `stakeholder-card bg-white p-6 rounded-2xl border ${s.border} shadow-sm hover:shadow-xl transition-all duration-300`;
+        card.innerHTML = `
+            <div class="flex items-center mb-5">
+                <div class="w-14 h-14 ${s.bgColor} rounded-2xl flex items-center justify-center mr-4 flex-shrink-0">
+                    <i class="fa-solid ${s.icon} ${s.color} text-2xl"></i>
+                </div>
+                <div>
+                    <h3 class="font-extrabold text-stone-900 text-xl">${s.entity}</h3>
+                    <span class="text-xs text-stone-400 font-medium uppercase tracking-wide">${s.role}</span>
+                </div>
+            </div>
+            <p class="text-stone-600 text-sm leading-relaxed mb-5 min-h-[64px]">${s.desc}</p>
+            <div class="pt-4 border-t border-stone-100 flex items-center text-sm font-bold ${s.color}">
+                <i class="fa-solid fa-circle-check mr-2"></i> ${s.keyTask}
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// ─── BUSINESS TAB ────────────────────────────────
+
+function switchBizTab(key, btnEl) {
+    document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.classList.add('text-stone-500', 'bg-stone-50', 'hover:bg-stone-100');
+    });
+    btnEl.classList.add('active');
+    btnEl.classList.remove('text-stone-500', 'bg-stone-50', 'hover:bg-stone-100');
+    renderBizTab(key);
+}
+
+function renderBizTab(key) {
+    const d = bizData[key];
+    const container = document.getElementById('biz-tab-content');
+    container.innerHTML = `
+        <div class="max-w-3xl w-full bg-white p-8 rounded-2xl border border-stone-100 shadow-sm">
+            <div class="flex items-center gap-4 mb-6 pb-4 border-b border-stone-100">
+                <div class="p-3 bg-stone-50 rounded-xl">
+                    <i class="fa-solid ${d.iconClass} ${d.iconColor} text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-stone-900">${d.title}</h3>
+            </div>
+            <p class="text-stone-600 leading-relaxed mb-6 text-base">${d.desc}</p>
+            <div class="bg-stone-50 p-5 rounded-xl border border-stone-200">
+                <h4 class="font-bold text-sm text-stone-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-bolt text-amber-500"></i> 핵심 전략 포인트
+                </h4>
+                <ul class="space-y-3">
+                    ${d.points.map(p => `
+                        <li class="flex items-start text-stone-700 font-medium text-sm">
+                            <i class="fa-solid fa-check text-emerald-500 mr-3 mt-0.5 flex-shrink-0"></i>
+                            <span>${p}</span>
+                        </li>
+                    `).join('')}
+                </ul>
+            </div>
+        </div>
+    `;
+}
+
+// ─── BUSINESS MODEL ──────────────────────────────
+
+let revenueChart = null;
+
+function renderProcess(mode) {
+    const container = document.getElementById('process-steps');
+    const data = businessModelData[mode];
+    container.innerHTML = '';
+    data.steps.forEach((step, i) => {
+        const isLast = i === data.steps.length - 1;
+        const div = document.createElement('div');
+        div.className = "flex items-start";
+        div.innerHTML = `
+            <div class="flex flex-col items-center mr-4">
+                <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center
+                            border-2 border-gray-600 hover:border-blue-500 hover:bg-blue-900
+                            transition-all duration-200 z-10 flex-shrink-0">
+                    <i class="fa-solid ${step.icon} text-gray-300 text-sm"></i>
+                </div>
+                ${!isLast ? '<div class="h-12 w-0.5 bg-gray-700 my-1"></div>' : ''}
+            </div>
+            <div class="pt-1 pb-4">
+                <h4 class="font-bold text-white text-base">${step.title}</h4>
+                <p class="text-gray-400 text-sm mt-1 leading-relaxed">${step.desc}</p>
+            </div>
+        `;
+        container.appendChild(div);
+    });
+    document.getElementById('chart-legend').innerText = data.chartText;
+    updateRevenueChart(data);
+}
+
+function updateRevenueChart(data) {
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    if (revenueChart) revenueChart.destroy();
+    revenueChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: data.chartLabels,
+            datasets: [{
+                data: data.chartData,
+                backgroundColor: ['#4B5563', '#3B82F6', '#D97706'],
+                borderWidth: 0,
+                hoverOffset: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#9CA3AF',
+                        font: { family: "'Noto Sans KR', sans-serif", size: 11 },
+                        usePointStyle: true, padding: 14
+                    }
+                },
+                tooltip: {
+                    callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw}%` },
+                    backgroundColor: 'rgba(15,20,30,0.95)',
+                    titleColor: '#fff', bodyColor: '#ccc',
+                    borderColor: '#374151', borderWidth: 1, padding: 10
+                }
+            },
+            cutout: '65%'
+        }
+    });
+}
+
+function setMode(mode) {
+    const b2b = document.getElementById('btn-b2b');
+    const b2c = document.getElementById('btn-b2c');
+    const activeClass = "px-6 py-3 rounded-lg text-sm font-bold bg-white text-gray-900 shadow transition-all";
+    const inactiveClass = "px-6 py-3 rounded-lg text-sm font-medium text-gray-400 hover:text-white transition-all";
+    b2b.className = mode === 'b2b' ? activeClass : inactiveClass;
+    b2c.className = mode === 'b2c' ? activeClass : inactiveClass;
+    renderProcess(mode);
+}
+
+// ─── RADAR CHART ─────────────────────────────────
+
+function initRadarChart() {
+    const ctx = document.getElementById('positioningChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: [
+                ['사찰음식 정통성','(Authenticity)'],
+                ['종단 지원/캡티브','(Captive Market)'],
+                ['B2B IT 인프라','(fresh09)'],
+                ['B2C 확장력','(daily09)'],
+                ['데이터 활용도','(BiteLabs AI)']
+            ],
+            datasets: [
+                {
+                    label: '청정연화 × 바이트랩스',
+                    data: [95, 95, 90, 85, 90],
+                    fill: true,
+                    backgroundColor: 'rgba(4,120,87,0.18)',
+                    borderColor: 'rgba(4,120,87,1)',
+                    pointBackgroundColor: 'rgba(4,120,87,1)',
+                    pointBorderColor: '#fff'
+                },
+                {
+                    label: '일반 F&B 대기업 (CJ, 신세계 등)',
+                    data: [40, 30, 80, 90, 70],
+                    fill: true,
+                    backgroundColor: 'rgba(168,162,158,0.18)',
+                    borderColor: 'rgba(168,162,158,1)',
+                    pointBackgroundColor: 'rgba(168,162,158,1)',
+                    pointBorderColor: '#fff'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    angleLines: { color: 'rgba(0,0,0,0.05)' },
+                    grid:       { color: 'rgba(0,0,0,0.05)' },
+                    pointLabels: {
+                        font: { family: "'Noto Sans KR', sans-serif", size: 12, weight: '600' },
+                        color: '#555'
+                    },
+                    ticks: { display: false, min: 0, max: 100 }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: { family: "'Noto Sans KR', sans-serif", size: 12 },
+                        usePointStyle: true, padding: 20
+                    }
+                }
+            }
+        }
+    });
+}
+
+// ─── SCROLL REVEAL ───────────────────────────────
+
+function initScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.section-reveal').forEach(el => observer.observe(el));
+}
+
+// ─── MOBILE MENU ─────────────────────────────────
+
+function toggleMenu() {
+    document.getElementById('mobile-nav').classList.toggle('hidden');
+}
+
+// ─── NAV SCROLL EFFECT ───────────────────────────
+// Hero 위에서는 완전 투명, 스크롤 내려가면 진한 글래스로 전환
+(function() {
+    const nav = document.querySelector('.glass-nav');
+    function updateNav() {
+        if (window.scrollY > 60) {
+            nav.style.background = 'rgba(14, 10, 4, 0.85)';
+            nav.style.boxShadow  = '0 4px 32px rgba(0,0,0,0.4), 0 1px 0 rgba(212,160,23,0.12) inset';
+        } else {
+            nav.style.background = 'rgba(18, 14, 8, 0.45)';
+            nav.style.boxShadow  = '0 4px 32px rgba(0,0,0,0.18)';
+        }
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+})();
+</script>
+
+</body>
+</html>
