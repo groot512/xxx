@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>보스의 에코시스템: 청년창업조세특례 전략 대시보드</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                brand: {
+                    50: '#fafaf9',
+                    100: '#f5f5f4',
+                    800: '#292524',
+                    900: '#1c1917',
+                },
+                safe: {
+                    100: '#d1fae5',
+                    500: '#10b981',
+                    600: '#059669',
+                },
+                risk: {
+                    100: '#ffe4e6',
+                    500: '#f43f5e',
+                    600: '#e11d48',
+                }
+            }
+        }
+    }
+}
+</script>
+<style>
+body { background-color: #fafaf9; color: #292524; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+    max-height: 350px;
+}
+.card-hover { transition: all 0.2s ease-in-out; }
+.card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+.active-tab { border-bottom: 2px solid #292524; font-weight: 600; color: #1c1917; }
+.inactive-tab { border-bottom: 2px solid transparent; color: #78716c; }
+.inactive-tab:hover { color: #292524; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f5f5f4; border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #a8a29e; }
+</style>
+</head>
+<body class="min-h-screen pb-12">
+
+<!-- Chosen Palette: Warm Stone (Background) + Emerald Green (Safe/Exempt) + Rose Red (Risk/Non-Exempt) -->
+<!-- Application Structure Plan: A dashboard layout designed to help the user (CEO) immediately distinguish between tax-exempt and non-exempt business models within their planned ecosystem. It starts with a high-level summary chart (informational overview), flows into an interactive filtering list linked to a detailed view panel (exploration and decision-making), and concludes with critical strategic advice. This structure transforms a static list into a functional planning tool for business registration. -->
+<!-- Visualization & Content Choices: 
+1. Chart.js Doughnut Chart: Shows the ratio of exempt vs. non-exempt business ideas. Goal: Inform & Emphasize the need for careful selection. 
+2. Interactive List & Detail Panel (Vanilla JS + HTML/CSS): Replaces traditional tables. Allows the user to click through their ideas and see exactly how to register them (업태/종목) and why. Goal: Organize & Detail. No SVG/Mermaid used; pure HTML layout with Unicode icons. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+    
+    <header class="mb-10 text-center sm:text-left border-b border-stone-200 pb-6">
+        <h1 class="text-3xl md:text-4xl font-bold text-brand-900 mb-3">🚀 에코시스템 구축: 사업자등록 세무 전략</h1>
+        <p class="text-lg text-stone-600 max-w-3xl">기획하신 다양한 비즈니스 모델(IT, F&B, 물류 등)을 <strong>청년창업 세액감면(50~100%)</strong> 적용 여부를 기준으로 분석했습니다. 각 업종을 클릭하여 정확한 업태/종목 명칭과 주의사항을 확인하고 등록 전략을 세워보세요.</p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <section class="lg:col-span-1 bg-white rounded-xl shadow-sm border border-stone-100 p-6 flex flex-col h-full">
+            <div class="mb-4">
+                <h2 class="text-xl font-bold text-brand-800 mb-2">포트폴리오 감면 적합도</h2>
+                <p class="text-sm text-stone-500">기획하신 9개의 주요 비즈니스 모델 중 세액감면을 받을 수 있는 주력 업종과 분리해야 할 리스크 업종의 비율입니다.</p>
+            </div>
+            <div class="flex-grow flex items-center justify-center">
+                <div class="chart-container">
+                    <canvas id="portfolioChart"></canvas>
+                </div>
+            </div>
+            <div class="mt-4 flex justify-center space-x-6 text-sm">
+                <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-safe-500 mr-2"></span>적용 가능 (6)</div>
+                <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-risk-500 mr-2"></span>적용 불가 (3)</div>
+            </div>
+        </section>
+
+        <section class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-stone-100 p-6 flex flex-col h-full">
+            <div class="mb-4 border-b border-stone-200">
+                <h2 class="text-xl font-bold text-brand-800 mb-2">업종별 등록 가이드 탐색</h2>
+                <p class="text-sm text-stone-500 mb-4">원하는 업종을 선택하여 사업자등록증에 기재할 정확한 정보를 확인하세요. 주력 사업은 반드시 '적용 가능' 업종으로 세팅해야 합니다.</p>
+                <div class="flex space-x-4">
+                    <button id="btn-all" class="pb-2 px-1 active-tab focus:outline-none transition-colors" onclick="filterItems('all')">전체 보기</button>
+                    <button id="btn-exempt" class="pb-2 px-1 inactive-tab focus:outline-none transition-colors flex items-center" onclick="filterItems('exempt')"><span class="text-safe-500 mr-1">🟢</span> 감면 가능</button>
+                    <button id="btn-risk" class="pb-2 px-1 inactive-tab focus:outline-none transition-colors flex items-center" onclick="filterItems('risk')"><span class="text-risk-500 mr-1">🔴</span> 감면 불가</button>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-6 h-[400px]">
+                <div class="w-full md:w-1/2 overflow-y-auto pr-2" id="business-list">
+                </div>
+
+                <div class="w-full md:w-1/2 bg-brand-50 rounded-lg p-5 border border-stone-200 overflow-y-auto" id="detail-panel">
+                    <div class="flex flex-col items-center justify-center h-full text-stone-400 text-center">
+                        <span class="text-4xl mb-3">👆</span>
+                        <p>왼쪽 목록에서 업종을 선택하면<br>상세한 등록 가이드가 표시됩니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="bg-brand-800 text-white rounded-xl shadow-md p-6 lg:p-8">
+        <h2 class="text-2xl font-bold mb-4 flex items-center">💡 Jarvis's 세무 전략 가이드</h2>
+        <p class="text-brand-100 mb-6 max-w-4xl">세액감면 혜택을 100% 활용하고 향후 세무적 리스크를 피하기 위한 기획자의 필수 지침입니다. 여러 업종을 섞기 전에 반드시 숙지하세요.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-brand-900 rounded-lg p-5 border border-stone-700 card-hover">	
+                <div class="text-3xl mb-3">🎯</div>
+                <h3 class="text-lg font-bold mb-2">1. 주력(Main)과 보조(Sub) 분리</h3>
+                <p class="text-sm text-stone-300">가장 먼저 매출이 일어나고 세액감면을 꼭 받아야 하는 통신판매업, IT, 음식점을 '주업종'으로 먼저 세팅하세요. 주업종의 성격이 감면 여부를 결정짓는 핵심입니다.</p>
+            </div>
+            
+            <div class="bg-brand-900 rounded-lg p-5 border border-stone-700 card-hover">
+                <div class="text-3xl mb-3">⚠️</div>
+                <h3 class="text-lg font-bold mb-2">2. 도매업(납품)은 신중하게</h3>
+                <p class="text-sm text-stone-300">음식점 식품 납품(도매)은 매출이 커지면 기장이 매우 복잡해집니다. 도매업이나 렌탈사업이 본격화되면 감면용 사업자와 분리하여 별도의 법인/사업자를 내는 것을 강력히 권장합니다.</p>
+            </div>
+            
+            <div class="bg-brand-900 rounded-lg p-5 border border-stone-700 card-hover">
+                <div class="text-3xl mb-3">🛡️</div>
+                <h3 class="text-lg font-bold mb-2">3. 포괄적 네이밍 활용</h3>
+                <p class="text-sm text-stone-300">종목에 '전자상거래업', '응용 소프트웨어 개발', '경영 컨설팅업' 등을 넣어두면 기획 중인 대부분의 무형적 비즈니스 확장을 유연하게 방어하고 감면 혜택을 유지할 수 있습니다.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+const businessData = [
+    {
+        id: 'ecom',
+        category: 'exempt',
+        icon: '📦',
+        title: '통신판매 (온라인/글로벌)',
+        status: '🟢 세액감면 적용 가능',
+        statusColor: 'text-safe-600',
+        statusBg: 'bg-safe-100',
+        uptae: '도매 및 소매업',
+        jongmok: '통신판매업, 전자상거래업, 해외직구대행업',
+        desc: '자사몰, 스마트스토어, 아마존 등 국내외 온라인 판매를 전부 커버할 수 있는 필수 업종입니다. 일반 도소매는 감면 제외지만 통신판매는 예외적으로 허용됩니다.'
+    },
+    {
+        id: 'it',
+        category: 'exempt',
+        icon: '💻',
+        title: 'IT (프로그램, 정보제공)',
+        status: '🟢 세액감면 적용 가능',
+        statusColor: 'text-safe-600',
+        statusBg: 'bg-safe-100',
+        uptae: '정보통신업',
+        jongmok: '응용 소프트웨어 개발 및 공급업, 컴퓨터 프로그래밍 서비스업, 포털 및 기타 인터넷 정보매개 서비스업, 자료처리 및 호스팅 서비스업',
+        desc: '홈페이지 제작, 앱 개발, 플랫폼 운영, 온라인 정보 제공 등 구상하시는 IT 기획 생태계를 모두 커버합니다.'
+    },
+    {
+        id: 'food',
+        category: 'exempt',
+        icon: '☕',
+        title: '식음료 (카페, 식당)',
+        status: '🟢 세액감면 적용 가능',
+        statusColor: 'text-safe-600',
+        statusBg: 'bg-safe-100',
+        uptae: '숙박 및 음식점업',
+        jongmok: '한식 음식점업, 기타 간이 음식점업, 커피전문점',
+        desc: '오프라인 매장을 직접 운영하는 경우 등록합니다. 단, 프랜차이즈 가맹점을 내어주는 본사 역할은 이 코드가 아닙니다.'
+    },
+    {
+        id: 'consult',
+        category: 'exempt',
+        icon: '📊',
+        title: '경영컨설팅',
+        status: '🟢 세액감면 적용 가능',
+        statusColor: 'text-safe-600',
+        statusBg: 'bg-safe-100',
+        uptae: '전문, 과학 및 기술 서비스업',
+        jongmok: '경영 컨설팅업, 공공관계 서비스업',
+        desc: 'B2B 마케팅 컨설팅, 비즈니스 기획 컨설팅 등 무형의 지식 서비스 매출을 발생시킬 때 유용합니다.'
+    },
+    {
+        id: 'logistics',
+        category: 'exempt',
+        icon: '🏭',
+        title: '물류 창고업',
+        status: '🟢 세액감면 적용 가능',
+        statusColor: 'text-safe-600',
+        statusBg: 'bg-safe-100',
+        uptae: '운수 및 창고업',
+        jongmok: '일반 창고업, 물류시설 운영업',
+        desc: '유통망 구축 시 창고를 기반으로 한 물류 서비스를 제공할 때 적용 가능합니다.'
+    },
+    {
+        id: 'tour',
+        category: 'exempt',
+        icon: '🌲',
+        title: '지역기반 관광농원',
+        status: '🟢 세액감면 적용 가능',
+        statusColor: 'text-safe-600',
+        statusBg: 'bg-safe-100',
+        uptae: '예술, 스포츠 및 여가관련 서비스업',
+        jongmok: '관광객 이용시설업, 휴양콘도 운영업',
+        desc: '단순 농업(작물재배)은 감면 대상이 아니지만, 법령상 관광객 이용시설업 형태로 등록 시 감면 혜택을 누릴 수 있습니다.'
+    },
+    {
+        id: 'b2b',
+        category: 'risk',
+        icon: '🚫',
+        title: '식자재/식품 납품 (B2B 도매)',
+        status: '🔴 세액감면 적용 불가',
+        statusColor: 'text-risk-600',
+        statusBg: 'bg-risk-100',
+        uptae: '도매 및 소매업',
+        jongmok: '음식료품 도매업, 기타 상품 도매업',
+        desc: '도매업은 조세특례제한법상 감면 대상에서 제외됩니다. B2B 납품을 본격화하려면 별도 사업자를 내거나 구분기장을 철저히 해야 합니다.'
+    },
+    {
+        id: 'rental',
+        category: 'risk',
+        icon: '🚫',
+        title: '렌탈 사업 (물품 대여)',
+        status: '🔴 세액감면 적용 불가',
+        statusColor: 'text-risk-600',
+        statusBg: 'bg-risk-100',
+        uptae: '임대업',
+        jongmok: '소비용품 임대업, 산업용 기계장비 임대업 등',
+        desc: '임대업 역시 감면 대상이 아닙니다. (단, 렌탈이 아닌 수리/유지보수 중심의 수리업은 감면 가능)'
+    },
+    {
+        id: 'franchise',
+        category: 'risk',
+        icon: '🚫',
+        title: '프랜차이즈 본부',
+        status: '🔴 세액감면 적용 불가',
+        statusColor: 'text-risk-600',
+        statusBg: 'bg-risk-100',
+        uptae: '도매 및 소매업 / 사업지원 서비스업',
+        jongmok: '프랜차이즈 본부 성격에 따라 상이',
+        desc: '본사가 가맹점에 식자재를 납품해 수익을 내면 도매업으로 감면 불가. 교육 수수료 등은 가능성이 있으나 실무상 매우 까다롭게 적용됩니다.'
+    }
+];
+
+let portfolioChartInstance = null;
+
+function renderList(filter) {
+    const listContainer = document.getElementById('business-list');
+    listContainer.innerHTML = '';
+    
+    const filteredData = filter === 'all' ? businessData : businessData.filter(item => item.category === filter);
+    
+    filteredData.forEach(item => {
+        const div = document.createElement('div');
+        const borderColor = item.category === 'exempt' ? 'border-safe-200 hover:border-safe-400' : 'border-risk-200 hover:border-risk-400';
+        
+        div.className = `p-4 mb-3 bg-white border ${borderColor} rounded-lg cursor-pointer card-hover transition-colors flex items-center justify-between`;
+        div.onclick = () => showDetail(item.id);
+        
+        div.innerHTML = `
+            <div class="flex items-center">
+                <span class="text-2xl mr-3">${item.icon}</span>
+                <div>
+                    <h3 class="font-bold text-brand-800">${item.title}</h3>
+                    <span class="text-xs font-semibold px-2 py-0.5 rounded-full ${item.statusBg} ${item.statusColor}">${item.category === 'exempt' ? '감면 대상' : '감면 제외'}</span>
+                </div>
+            </div>
+            <span class="text-stone-400 text-xl">›</span>
+        `;
+        listContainer.appendChild(div);
+    });
+}
+
+function showDetail(id) {
+    const item = businessData.find(d => d.id === id);
+    if (!item) return;
+    
+    const detailPanel = document.getElementById('detail-panel');
+    detailPanel.innerHTML = `
+        <div class="h-full flex flex-col">
+            <div class="mb-4 pb-4 border-b border-stone-200">
+                <div class="flex items-center mb-2">
+                    <span class="text-3xl mr-2">${item.icon}</span>
+                    <h2 class="text-xl font-bold text-brand-900">${item.title}</h2>
+                </div>
+                <div class="inline-block px-3 py-1 rounded-md text-sm font-bold ${item.statusBg} ${item.statusColor}">
+                    ${item.status}
+                </div>
+            </div>
+            
+            <div class="space-y-4 flex-grow">
+                <div>
+                    <h4 class="text-xs font-bold text-stone-500 uppercase tracking-wider mb-1">등록할 업태</h4>
+                    <p class="text-base font-medium text-brand-800 bg-white px-3 py-2 rounded border border-stone-200 shadow-sm">${item.uptae}</p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-stone-500 uppercase tracking-wider mb-1">등록할 종목 (업종명)</h4>
+                    <p class="text-base font-medium text-brand-800 bg-white px-3 py-2 rounded border border-stone-200 shadow-sm">${item.jongmok}</p>
+                </div>
+                <div class="bg-white p-4 rounded border border-stone-200 shadow-sm mt-4">
+                    <h4 class="text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">Jarvis's 코멘트</h4>
+                    <p class="text-sm text-stone-700 leading-relaxed">${item.desc}</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function updateTabs(activeFilter) {
+    const tabs = ['all', 'exempt', 'risk'];
+    tabs.forEach(tab => {
+        const btn = document.getElementById(`btn-${tab}`);
+        if (tab === activeFilter) {
+            btn.classList.remove('inactive-tab');
+            btn.classList.add('active-tab');
+        } else {
+            btn.classList.remove('active-tab');
+            btn.classList.add('inactive-tab');
+        }
+    });
+}
+
+function filterItems(filter) {
+    updateTabs(filter);
+    renderList(filter);
+    document.getElementById('detail-panel').innerHTML = `
+        <div class="flex flex-col items-center justify-center h-full text-stone-400 text-center">
+            <span class="text-4xl mb-3">👆</span>
+            <p>왼쪽 목록에서 업종을 선택하면<br>상세한 등록 가이드가 표시됩니다.</p>
+        </div>
+    `;
+}
+
+function initChart() {
+    const ctx = document.getElementById('portfolioChart').getContext('2d');
+    const exemptCount = businessData.filter(d => d.category === 'exempt').length;
+    const riskCount = businessData.filter(d => d.category === 'risk').length;
+    
+    portfolioChartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['적용 가능 (감면)', '적용 불가 (리스크)'],
+            datasets: [{
+                data: [exemptCount, riskCount],
+                backgroundColor: ['#10b981', '#f43f5e'],
+                hoverBackgroundColor: ['#059669', '#e11d48'],
+                borderWidth: 2,
+                borderColor: '#ffffff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '65%',
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return ` ${context.label}: ${context.raw}개 업종`;
+                        }
+                    },
+                    padding: 12,
+                    cornerRadius: 8,
+                    titleFont: { size: 14 },
+                    bodyFont: { size: 14 }
+                }
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderList('all');
+    initChart();
+});
+</script>
+
+</body>
+</html>
