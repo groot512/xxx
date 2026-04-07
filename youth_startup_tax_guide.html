@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>청년창업 세액감면 완전 가이드 | 경산시 기준</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-deep: #0a3d2e;
+  --green-mid: #1a6b4a;
+  --green-vivid: #2ecc8a;
+  --green-light: #d4f5e9;
+  --green-pale: #f0fdf7;
+  --amber: #f5a623;
+  --amber-pale: #fff8ed;
+  --red-soft: #e74c3c;
+  --red-pale: #fff0ef;
+  --blue: #2563eb;
+  --blue-pale: #eff6ff;
+  --ink: #0f1f17;
+  --ink-mid: #2d4a3a;
+  --ink-light: #5a7a6a;
+  --border: #d0e8dd;
+  --bg: #f7fdf9;
+  --white: #ffffff;
+  --mono: 'JetBrains Mono', monospace;
+  --serif: 'Noto Serif KR', serif;
+  --sans: 'Noto Sans KR', sans-serif;
+  --shadow-sm: 0 2px 8px rgba(10,61,46,0.08);
+  --shadow-md: 0 8px 32px rgba(10,61,46,0.12);
+  --shadow-lg: 0 20px 60px rgba(10,61,46,0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── HERO ─────────────────────────────── */
+.hero {
+  background: var(--green-deep);
+  position: relative;
+  overflow: hidden;
+  padding: 80px 24px 100px;
+  text-align: center;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(46,204,138,0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 80% 70%, rgba(26,107,74,0.3) 0%, transparent 70%);
+}
+
+.hero-label {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green-vivid);
+  border: 1px solid rgba(46,204,138,0.4);
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 10px;
+}
+
+.hero-title span {
+  color: var(--green-vivid);
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.65);
+  position: relative;
+  z-index: 1;
+  margin-bottom: 48px;
+}
+
+.hero-cards {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 20px 28px;
+  text-align: center;
+  min-width: 140px;
+  backdrop-filter: blur(10px);
+}
+
+.hero-card-num {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--green-vivid);
+  line-height: 1;
+}
+
+.hero-card-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* ── SECTION COMMON ───────────────────── */
+.section {
+  padding: 72px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  margin-bottom: 12px;
+}
+
+.section-tag::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--green-vivid);
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 700;
+  color: var(--green-deep);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.section-desc {
+  font-size: 15px;
+  color: var(--ink-light);
+  margin-bottom: 40px;
+}
+
+/* ── INFO BAND ────────────────────────── */
+.info-band {
+  background: var(--green-deep);
+  padding: 0;
+}
+
+.info-band-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.info-cell {
+  padding: 32px 28px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+}
+
+.info-cell:last-child { border-right: none; }
+
+.info-cell-label {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--green-vivid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.info-cell-value {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+.info-cell-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+
+/* ── RATE GRID ────────────────────────── */
+.rate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.rate-card {
+  border-radius: 20px;
+  padding: 28px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid transparent;
+}
+
+.rate-card.featured {
+  background: var(--green-deep);
+  border-color: var(--green-vivid);
+  box-shadow: var(--shadow-lg), 0 0 0 4px rgba(46,204,138,0.08);
+}
+
+.rate-card.mid {
+  background: var(--white);
+  border-color: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.rate-card.low {
+  background: var(--white);
+  border-color: var(--border);
+  box-shadow: var(--shadow-sm);
+  opacity: 0.8;
+}
+
+.rate-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-family: var(--mono);
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+  letter-spacing: 0.08em;
+}
+
+.featured .rate-badge { background: var(--green-vivid); color: var(--green-deep); }
+.mid .rate-badge { background: var(--blue-pale); color: var(--blue); }
+.low .rate-badge { background: #f1f5f9; color: #64748b; }
+
+.rate-pct {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.featured .rate-pct { color: var(--green-vivid); }
+.mid .rate-pct { color: var(--blue); }
+.low .rate-pct { color: #94a3b8; }
+
+.rate-region {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.featured .rate-region { color: rgba(255,255,255,0.85); }
+.mid .rate-region { color: var(--ink-mid); }
+.low .rate-region { color: #94a3b8; }
+
+.rate-you {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--green-vivid);
+  background: rgba(46,204,138,0.1);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+/* ── DIVIDER ──────────────────────────── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0 24px;
+}
+
+/* ── TABLE SECTION ────────────────────── */
+.table-group { margin-bottom: 40px; }
+
+.group-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: var(--green-deep);
+  border-radius: 12px 12px 0 0;
+}
+
+.group-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(46,204,138,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.group-name {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+
+.table-wrap {
+  border: 1.5px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+  background: var(--white);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+thead th {
+  background: #f8fdfb;
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-light);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+tbody tr {
+  border-bottom: 1px solid #f0f7f4;
+  transition: background 0.15s;
+}
+
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--green-pale); }
+
+td {
+  padding: 12px 14px;
+  vertical-align: middle;
+}
+
+.code-chip {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--green-mid);
+  background: var(--green-pale);
+  border: 1px solid var(--green-light);
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.item-name {
+  font-weight: 500;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.item-sub {
+  font-size: 11px;
+  color: var(--ink-light);
+  margin-top: 2px;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.b-ok { background: #dcfce7; color: #166534; }
+.b-no { background: #fee2e2; color: #991b1b; }
+.b-warn { background: #fef9c3; color: #854d0e; }
+.b-check { background: var(--blue-pale); color: #1e40af; }
+
+/* ── NOTICE BOX ───────────────────────── */
+.notice {
+  border-radius: 16px;
+  padding: 24px 28px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.notice.green { background: var(--green-pale); border: 1.5px solid var(--green-light); }
+.notice.amber { background: var(--amber-pale); border: 1.5px solid #fde68a; }
+.notice.red   { background: var(--red-pale);  border: 1.5px solid #fecaca; }
+
+.notice-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.notice-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.notice.green .notice-title { color: var(--green-deep); }
+.notice.amber .notice-title { color: #78350f; }
+.notice.red   .notice-title { color: #7f1d1d; }
+
+.notice-body {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.notice.green .notice-body { color: var(--ink-mid); }
+.notice.amber .notice-body { color: #92400e; }
+.notice.red   .notice-body { color: #991b1b; }
+
+/* ── POINTS SECTION ───────────────────── */
+.points-bg {
+  background: var(--green-deep);
+  position: relative;
+  overflow: hidden;
+}
+
+.points-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(46,204,138,0.08) 0%, transparent 70%);
+}
+
+.points-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 72px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.point-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.point-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 28px 24px;
+  position: relative;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.point-card:hover {
+  background: rgba(255,255,255,0.09);
+  transform: translateY(-4px);
+}
+
+.point-num {
+  font-family: var(--serif);
+  font-size: 48px;
+  font-weight: 900;
+  color: rgba(46,204,138,0.2);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.point-title {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.point-body {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+}
+
+.point-highlight {
+  display: inline;
+  color: var(--green-vivid);
+  font-weight: 600;
+}
+
+/* ── FOOTER ───────────────────────────── */
+footer {
+  background: var(--ink);
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.footer-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.footer-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.7;
+}
+
+.footer-date {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--green-vivid);
+  margin-top: 16px;
+  letter-spacing: 0.1em;
+}
+
+/* ── FADE-IN ANIMATION ────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ───────────────────────── */
+@media (max-width: 640px) {
+  .hero { padding: 56px 20px 72px; }
+  .hero-cards { gap: 10px; }
+  .hero-card { min-width: 110px; padding: 14px 16px; }
+  .hero-card-num { font-size: 28px; }
+  .info-band-inner { grid-template-columns: 1fr; }
+  .info-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 24px 20px; }
+  .rate-grid { grid-template-columns: 1fr; }
+  .point-cards { grid-template-columns: 1fr; }
+  thead { display: none; }
+  tbody tr { display: block; padding: 12px 0; }
+  td { display: block; padding: 4px 14px; }
+  td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 10px;
+    color: var(--ink-light);
+    font-family: var(--mono);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .section { padding: 48px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-label">청년창업중소기업 세액감면 완전 가이드</div>
+  <h1 class="hero-title">경산시에서 창업하면<br><span>소득세 5년간 100%</span> 감면</h1>
+  <p class="hero-sub">조세특례제한법 제6조 · 2026년 1월 1일 이후 창업 기준 · 개인사업자</p>
+  <div class="hero-cards">
+    <div class="hero-card">
+      <div class="hero-card-num">100%</div>
+      <div class="hero-card-label">소득세 감면율<br>(수도권 외 + 청년)</div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-num">5년</div>
+      <div class="hero-card-label">최초 소득 발생<br>연도부터</div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-num">5억</div>
+      <div class="hero-card-label">연간 감면 한도<br>(2025년 이후 창업)</div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-num">34세</div>
+      <div class="hero-card-label">청년 기준<br>만 15~34세 이하</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INFO BAND ═══ -->
+<div class="info-band">
+  <div class="info-band-inner">
+    <div class="info-cell">
+      <div class="info-cell-label">창업 지역</div>
+      <div class="info-cell-value">경상북도 경산시</div>
+      <div class="info-cell-note">수도권 외 지역 → 최고 감면율 적용</div>
+    </div>
+    <div class="info-cell">
+      <div class="info-cell-label">사업자 형태</div>
+      <div class="info-cell-value">개인사업자</div>
+      <div class="info-cell-note">종합소득세 신고 시 감면 신청</div>
+    </div>
+    <div class="info-cell">
+      <div class="info-cell-label">적용 법령</div>
+      <div class="info-cell-value">조특법 제6조</div>
+      <div class="info-cell-note">조세특례제한법 시행령 제5조</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 감면율 섹션 ═══ -->
+<div class="section fade-up">
+  <div class="section-tag">감면율 비교</div>
+  <h2 class="section-title">지역별 감면율 한눈에 비교</h2>
+  <p class="section-desc">창업 지역에 따라 감면율이 크게 달라집니다. 경산시는 최고 혜택 지역입니다.</p>
+
+  <div class="rate-grid">
+    <div class="rate-card featured">
+      <div class="rate-badge">경산시 해당 ★</div>
+      <div class="rate-pct">100%</div>
+      <div class="rate-region">수도권 외 지역<br>+ 청년창업</div>
+      <div class="rate-you">지금 내 상황</div>
+    </div>
+    <div class="rate-card mid">
+      <div class="rate-badge">수도권 청년</div>
+      <div class="rate-pct">75%</div>
+      <div class="rate-region">수도권(과밀제외)<br>+ 청년창업</div>
+    </div>
+    <div class="rate-card low">
+      <div class="rate-badge">과밀억제권역</div>
+      <div class="rate-pct">50%</div>
+      <div class="rate-region">수도권과밀억제권역<br>청년 / 수도권 외 일반</div>
+    </div>
+  </div>
+
+  <div class="notice green">
+    <div class="notice-icon">⚡</div>
+    <div>
+      <div class="notice-title">고용 증가 시 추가 혜택</div>
+      <div class="notice-body">2025년 이후 창업 기업이 전년 대비 고용 인원을 증가시키면, 지역·나이 요건과 관계없이 <strong>100% 감면</strong>이 가능합니다. 직원을 채용할 계획이라면 적극 활용하세요.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ 업종 테이블 ═══ -->
+<div class="section fade-up">
+  <div class="section-tag">업종 코드 가이드</div>
+  <h2 class="section-title">사업자 등록증에 넣을 업종 목록</h2>
+  <p class="section-desc">아래 코드를 <strong>오늘 등록 시 한꺼번에</strong> 기재해야 감면 적용이 가능합니다. 추후 추가는 감면 불가.</p>
+
+  <!-- 통신판매 -->
+  <div class="table-group fade-up">
+    <div class="group-header">
+      <div class="group-icon">🛒</div>
+      <div class="group-name">온라인 유통 / 통신판매</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>업종코드</th>
+            <th>종목명</th>
+            <th>감면여부</th>
+            <th>활용 시나리오</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">525101</span></td>
+            <td data-label="종목명"><div class="item-name">전자상거래 소매업</div><div class="item-sub">스마트스토어, 쇼핑몰</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">국내 B2C 온라인 판매 핵심</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">525103</span></td>
+            <td data-label="종목명"><div class="item-name">전자상거래 소매 중개업</div><div class="item-sub">오픈마켓 입점, 위탁 판매</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">쿠팡·네이버 등 플랫폼 입점</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">525104</span></td>
+            <td data-label="종목명"><div class="item-name">SNS마켓</div><div class="item-sub">인스타그램, 유튜브 판매</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">소셜 채널 기반 판매</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">519910</span></td>
+            <td data-label="종목명"><div class="item-name">기타 상품 종합 도매업</div><div class="item-sub">B2B 도매, 해외 수출입</div></td>
+            <td data-label="감면여부"><span class="badge b-warn">확인 필요</span></td>
+            <td data-label="활용">식품 납품·해외판매 — 세무사 확인 요</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 음식 -->
+  <div class="table-group fade-up">
+    <div class="group-header">
+      <div class="group-icon">🍽️</div>
+      <div class="group-name">음식점 / 식당 / 프랜차이즈</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>업종코드</th>
+            <th>종목명</th>
+            <th>감면여부</th>
+            <th>활용 시나리오</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">552101</span></td>
+            <td data-label="종목명"><div class="item-name">한식 일반음식점업</div><div class="item-sub">식당, 한식당</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">기본 음식점 운영</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">552201</span></td>
+            <td data-label="종목명"><div class="item-name">외국식 음식점업</div><div class="item-sub">중식·일식·양식 등</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">다양한 메뉴 확장 시</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">552301</span></td>
+            <td data-label="종목명"><div class="item-name">기관 구내식당업</div><div class="item-sub">위탁급식, 구내식당</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">기업·기관 식품 납품 연계</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">552401</span></td>
+            <td data-label="종목명"><div class="item-name">출장 음식 서비스업</div><div class="item-sub">케이터링, 행사 납품</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">B2B 음식 납품·행사 케이터링</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">552911</span></td>
+            <td data-label="종목명"><div class="item-name">제과점업</div><div class="item-sub">직접 제조·판매 베이커리</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">카페형 베이커리 (카페 대체)</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">553001</span></td>
+            <td data-label="종목명"><div class="item-name">커피숍 (비알코올음료점)</div><div class="item-sub">일반 카페</div></td>
+            <td data-label="감면여부"><span class="badge b-no">감면 제외</span></td>
+            <td data-label="활용">매출 발생 시 등록, 감면은 불가</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">940101</span></td>
+            <td data-label="종목명"><div class="item-name">경영컨설팅업 (프랜차이즈 본사)</div><div class="item-sub">가맹점 모집·관리</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">프랜차이즈 본사 역할 시</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 관광 -->
+  <div class="table-group fade-up">
+    <div class="group-header">
+      <div class="group-icon">🌿</div>
+      <div class="group-name">관광농원 / 지역 관광</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>업종코드</th>
+            <th>종목명</th>
+            <th>감면여부</th>
+            <th>활용 시나리오</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">751002</span></td>
+            <td data-label="종목명"><div class="item-name">관광농원업</div><div class="item-sub">농촌체험·관광 복합시설</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">관광진흥법상 관광객이용시설업</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">551001</span></td>
+            <td data-label="종목명"><div class="item-name">일반 숙박업</div><div class="item-sub">펜션·게스트하우스·농가민박</div></td>
+            <td data-label="감면여부"><span class="badge b-check">조건부</span></td>
+            <td data-label="활용">관광진흥법 등록 숙박이면 감면 가능</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 물류 -->
+  <div class="table-group fade-up">
+    <div class="group-header">
+      <div class="group-icon">🚚</div>
+      <div class="group-name">물류 / 창고 / 유통</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>업종코드</th>
+            <th>종목명</th>
+            <th>감면여부</th>
+            <th>활용 시나리오</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">493001</span></td>
+            <td data-label="종목명"><div class="item-name">택배업</div><div class="item-sub">소화물 배송, 라스트마일</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">물류산업 감면 대상</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">521001</span></td>
+            <td data-label="종목명"><div class="item-name">창고업</div><div class="item-sub">보관창고, 냉동·냉장창고</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">재고 보관·물류 기지 운영</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">522001</span></td>
+            <td data-label="종목명"><div class="item-name">화물 운송업</div><div class="item-sub">트럭·배달 운송</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">직접 배송·납품 시</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- IT -->
+  <div class="table-group fade-up">
+    <div class="group-header">
+      <div class="group-icon">💻</div>
+      <div class="group-name">정보통신 / IT / 소프트웨어</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>업종코드</th>
+            <th>종목명</th>
+            <th>감면여부</th>
+            <th>활용 시나리오</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">722001</span></td>
+            <td data-label="종목명"><div class="item-name">소프트웨어 개발·공급업</div><div class="item-sub">앱 개발, 프로그램 제작</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">정보통신업 핵심 감면 코드</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">722004</span></td>
+            <td data-label="종목명"><div class="item-name">시스템 통합 구축업 (SI)</div><div class="item-sub">홈페이지·웹사이트 구축</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">홈페이지 제작 수주</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">732002</span></td>
+            <td data-label="종목명"><div class="item-name">온라인 정보제공 서비스업</div><div class="item-sub">콘텐츠·데이터 정보 제공</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">정보 플랫폼 운영</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">742001</span></td>
+            <td data-label="종목명"><div class="item-name">컴퓨터 프로그래밍 서비스업</div><div class="item-sub">외주 개발, 맞춤 SW</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">외주 개발 수주</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 컨설팅·렌탈 -->
+  <div class="table-group fade-up">
+    <div class="group-header">
+      <div class="group-icon">📊</div>
+      <div class="group-name">경영컨설팅 / 광고 / 렌탈</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>업종코드</th>
+            <th>종목명</th>
+            <th>감면여부</th>
+            <th>활용 시나리오</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">940101</span></td>
+            <td data-label="종목명"><div class="item-name">경영컨설팅업</div><div class="item-sub">경영전략·코칭·컨설팅</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">전문·과학·기술 서비스업 해당</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">713001</span></td>
+            <td data-label="종목명"><div class="item-name">광고 대행업</div><div class="item-sub">온·오프라인 광고 대행</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">마케팅·광고 서비스</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">699001</span></td>
+            <td data-label="종목명"><div class="item-name">기타 전문서비스업</div><div class="item-sub">번역·통역, 기타 전문</div></td>
+            <td data-label="감면여부"><span class="badge b-ok">감면 ✓</span></td>
+            <td data-label="활용">해외 비즈니스 지원</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">752001</span></td>
+            <td data-label="종목명"><div class="item-name">산업용 기계장비 임대업</div><div class="item-sub">장비·기계 렌탈</div></td>
+            <td data-label="감면여부"><span class="badge b-no">감면 제외</span></td>
+            <td data-label="활용">렌탈 매출은 발생 — 등록은 가능</td>
+          </tr>
+          <tr>
+            <td data-label="업종코드"><span class="code-chip">752002</span></td>
+            <td data-label="종목명"><div class="item-name">소비용품 임대업</div><div class="item-sub">정수기·공기청정기·가구 렌탈</div></td>
+            <td data-label="감면여부"><span class="badge b-no">감면 제외</span></td>
+            <td data-label="활용">렌탈 사업 확장용</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ 3가지 핵심 포인트 ═══ -->
+<section class="points-bg">
+  <div class="points-inner">
+    <div class="section-tag" style="color:var(--green-vivid);">반드시 기억할 것</div>
+    <h2 class="section-title" style="color:var(--white); margin-bottom:40px;">꼭 알아야 할 핵심 포인트 3가지</h2>
+
+    <div class="point-cards">
+      <div class="point-card">
+        <div class="point-num">01</div>
+        <div class="point-title">카페는 감면 제외,<br>제과점으로 등록하세요</div>
+        <div class="point-body">
+          일반 카페(커피숍)는 <span class="point-highlight">'비알코올음료점업'</span>으로 분류돼 감면 대상이 아닙니다.<br><br>
+          빵·디저트를 직접 만들어 판매하는 비중이 높다면 <span class="point-highlight">제과점업(552911)</span>으로 등록하면 감면 적용이 가능합니다. 카페 음료 + 베이커리 병행 시 적극 고려하세요.
+        </div>
+      </div>
+      <div class="point-card">
+        <div class="point-num">02</div>
+        <div class="point-title">업종 추가는 오늘이<br>마지막 기회입니다</div>
+        <div class="point-body">
+          세액감면은 <span class="point-highlight">최초 사업자등록 시 기재한 업종코드</span>가 기준입니다.<br><br>
+          나중에 업종을 추가하면 '사업의 확장'으로 보아 <span class="point-highlight">추가 업종에는 감면이 적용되지 않습니다.</span><br><br>
+          오늘 홈택스 또는 세무서에서 위 코드를 한꺼번에 등록하세요.
+        </div>
+      </div>
+      <div class="point-card">
+        <div class="point-num">03</div>
+        <div class="point-title">렌탈·도매업도 등록은<br>해두는 게 맞습니다</div>
+        <div class="point-body">
+          렌탈업(임대업)과 일반 도매업은 <span class="point-highlight">감면 대상에서 제외</span>되지만, 실제 매출이 발생하면 반드시 신고해야 합니다.<br><br>
+          감면 혜택은 없더라도 <span class="point-highlight">사업 범위 확보</span>를 위해 등록해두는 것이 유리합니다. 세무사와 코드별 세율을 확인하세요.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 주의사항 ═══ -->
+<div class="section fade-up">
+  <div class="section-tag">체크리스트</div>
+  <h2 class="section-title">오늘 등록 전 최종 확인</h2>
+  <p class="section-desc">아래 항목을 빠짐없이 점검하고 세무서에 방문하세요.</p>
+
+  <div class="notice amber">
+    <div class="notice-icon">⚠️</div>
+    <div>
+      <div class="notice-title">창업으로 인정받지 못하는 경우</div>
+      <div class="notice-body">
+        합병·분할·사업 양수를 통한 승계 / 기존 사업의 자산을 인수하여 동일 업종 개시 / 폐업 후 동일 업종 재창업 / 기존 사업자에 업종 추가 확장 — 이 경우 세액감면이 적용되지 않습니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="notice green">
+    <div class="notice-icon">✅</div>
+    <div>
+      <div class="notice-title">감면 신청 방법 (개인사업자)</div>
+      <div class="notice-body">
+        매년 <strong>5월 종합소득세 신고</strong> 시 국세청 홈택스에서 '세액감면신청서'를 작성해 제출하거나 세무서에 방문해 신청합니다. 별도의 사전 신청 절차는 없으며, 요건을 충족하면 신고 시 자동 적용됩니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="notice red">
+    <div class="notice-icon">🔴</div>
+    <div>
+      <div class="notice-title">업종코드 확정은 반드시 세무사와 최종 확인</div>
+      <div class="notice-body">
+        이 문서는 참고용입니다. 업종코드별 세율·경비율·감면여부는 세부 코드에 따라 달라질 수 있으며, 실제 등록 전 <strong>세무사 또는 관할 세무서와 최종 확인</strong>을 권장합니다. 특히 도매업(519910) 코드의 감면 여부는 반드시 확인이 필요합니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">청년창업 세액감면 완전 가이드</div>
+    <div class="footer-note">
+      본 자료는 조세특례제한법 제6조 및 동법 시행령 제5조를 기준으로 작성되었습니다.<br>
+      법령 해석 및 개인 상황에 따라 적용 결과가 달라질 수 있으므로 전문가 상담을 권장합니다.
+    </div>
+    <div class="footer-date">2026.04.07 기준 · 경상북도 경산시 · 개인사업자</div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
