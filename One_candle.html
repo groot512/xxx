@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캔들의 꼬리: 시장 심리와 변곡점의 신호학</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: #f8fafc; /* Slate 50 */
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7); /* Slate 800 with opacity */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        up: '#ef4444', /* Red for Korean market standard (Up) or change to green if preferred */
+                        down: '#3b82f6', /* Blue for Korean market standard (Down) */
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased leading-relaxed">
+
+    <!-- Header Section -->
+    <header class="relative pt-20 pb-16 text-center px-4 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-slate-900"></div>
+        </div>
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <span class="px-3 py-1 text-xs font-semibold tracking-wider text-blue-300 uppercase bg-blue-900/50 rounded-full border border-blue-700/50">
+                트레이딩 인사이트 가이드
+            </span>
+            <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
+                <span class="gradient-text">캔들 하나면 충분했다</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-300 font-light max-w-2xl mx-auto">
+                3억을 잃고 나서야 깨달은 가장 본질적인 지표.<br class="hidden md:block">
+                세력의 의도와 변곡점을 읽어내는 단 하나의 열쇠.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 pb-24 space-y-16">
+
+        <!-- Intro / Problem Definition -->
+        <section class="glass-panel rounded-2xl p-6 md:p-10 shadow-2xl">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-red-400">
+                    <i class="fas fa-exclamation-triangle text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold">보조지표의 함정</h2>
+            </div>
+            <p class="text-slate-300 text-lg leading-relaxed">
+                보통 돈을 잃는 분들은 어떻게 시작할까요? 캔들은 대충 보고 그 위에 이평선 깔고, MACD 추가하고 점점 더 많은 걸 봅니다. 
+                하지만 그건 <strong>후행성 보조지표</strong>에 불과합니다. 세력과 마켓메이커가 우리를 속일 수 없는 유일한 흔적은 
+                바로 지금 움직이는 <strong>'캔들 그 자체'</strong>에 있습니다.
+            </p>
+        </section>
+
+        <!-- 4 Core Elements of Candlesticks -->
+        <section>
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-4">캔들을 해독하는 4가지 핵심 요소</h2>
+                <p class="text-slate-400">복잡한 패턴을 외울 필요 없이, 이 네 가지만으로 시장의 심리를 읽어냅니다.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Element 1 -->
+                <div class="glass-panel p-6 rounded-xl border-l-4 border-l-blue-500 hover:transform hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold"><i class="fas fa-palette mr-2 text-blue-400"></i> 색상 (Color)</h3>
+                        <span class="text-xs bg-slate-800 px-2 py-1 rounded text-slate-300">방향성</span>
+                    </div>
+                    <p class="text-slate-300">
+                        양봉이냐 음봉이냐. 큰 타임프레임(주봉, 월봉)에서의 색상은 세력이 이번 주, 이번 달에 가고자 하는 방향을 알려주는 강력한 단서입니다. 개인은 분봉을 제외한 시가를 만들 수 없습니다.
+                    </p>
+                </div>
+
+                <!-- Element 2 -->
+                <div class="glass-panel p-6 rounded-xl border-l-4 border-l-purple-500 hover:transform hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold"><i class="fas fa-square mr-2 text-purple-400"></i> 몸통 (Body)</h3>
+                        <span class="text-xs bg-slate-800 px-2 py-1 rounded text-slate-300">힘의 크기</span>
+                    </div>
+                    <p class="text-slate-300">
+                        시가에서 종가까지 가격 합의가 이루어진 구간. 꽉 찬 몸통은 반대 세력의 저항 없이 돈으로 밀어붙였다는 뜻입니다. <strong>시가가 전일 종가보다 높은 갭(Gap)</strong>은 쏠림 현상을 의미합니다.
+                    </p>
+                </div>
+
+                <!-- Element 3 -->
+                <div class="glass-panel p-6 rounded-xl border-l-4 border-l-red-500 hover:transform hover:-translate-y-1 transition-all duration-300 md:col-span-2 lg:col-span-1">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold"><i class="fas fa-arrows-alt-v mr-2 text-red-400"></i> 꼬리 (Tail)</h3>
+                        <span class="text-xs bg-slate-800 px-2 py-1 rounded text-slate-300">전투의 흔적</span>
+                    </div>
+                    <p class="text-slate-300">
+                        고점/저점을 갱신하지 못하고 밀려난 자리. <strong>강력한 지지/저항 매물대</strong>이자, 시장이 언젠가 다시 채우러 가는 <strong>목표가</strong>로 작용합니다. (자세한 내용은 아래 섹션 참고)
+                    </p>
+                </div>
+
+                <!-- Element 4 -->
+                <div class="glass-panel p-6 rounded-xl border-l-4 border-l-green-500 hover:transform hover:-translate-y-1 transition-all duration-300 md:col-span-2 lg:col-span-1">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold"><i class="fas fa-expand-arrows-alt mr-2 text-green-400"></i> 크기 (Size)</h3>
+                        <span class="text-xs bg-slate-800 px-2 py-1 rounded text-slate-300">시장의 압도력</span>
+                    </div>
+                    <p class="text-slate-300">
+                        압도적으로 커진 캔들(달러 주머니)은 세력이 물량을 쓸어 담고 한 방향으로 쏘겠다는 의도입니다. 매집은 크기가 작은 곳에서 일어나며, 크기가 커질 때가 진입 타이밍입니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deep Dive: TAIL -->
+        <section class="relative">
+            <div class="absolute -inset-4 bg-gradient-to-r from-red-900/20 to-orange-900/20 z-0 blur-xl rounded-3xl"></div>
+            <div class="relative z-10 glass-panel border border-red-900/50 rounded-2xl p-6 md:p-10">
+                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                    <i class="fas fa-search-dollar text-red-400"></i>
+                    딥다이브: '꼬리'의 신호학
+                </h2>
+                
+                <div class="space-y-6">
+                    <div class="flex flex-col md:flex-row gap-4 items-start">
+                        <div class="bg-red-900/50 text-red-300 font-bold px-4 py-2 rounded-lg whitespace-nowrap">
+                            존 윅 캔들
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2">치열한 전투와 무자비한 반격</h4>
+                            <p class="text-slate-300">
+                                한쪽이 공격했다가 반대편에서 무자비하게 반격당한 흔적입니다. 아래꼬리는 하락세가 강한 매수세에 막혀 튕겨 올라온 것으로, 현재 시점까지 <strong>매수세가 승리했다는 확실한 증거</strong>입니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="w-full h-px bg-slate-700"></div>
+
+                    <div class="flex flex-col md:flex-row gap-4 items-start">
+                        <div class="bg-blue-900/50 text-blue-300 font-bold px-4 py-2 rounded-lg whitespace-nowrap">
+                            매물대 법칙
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2">시장은 결국 꼬리를 채우러 간다</h4>
+                            <p class="text-slate-300">
+                                꼬리가 달린 곳은 제때 탈출하지 못한 투자자들이 몰려있는 곳입니다. 세력은 이 본전 매도 물량을 소화하기 위해 가격을 다시 끌어올립니다. 따라서 꼬리는 <strong>현재의 진입 타점</strong>이자 <strong>추후 도달할 목표가</strong>가 됩니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practical Trading Strategies -->
+        <section>
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-4">실전 매매 적용 패턴 3선</h2>
+                <p class="text-slate-400">이론을 넘어 실제 차트에서 수익을 내는 변곡점과 돌파의 기술</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex flex-wrap gap-2 mb-6" id="tabs">
+                <button onclick="showTab('strategy1')" class="tab-btn active flex-1 bg-blue-600 hover:bg-blue-500 text-white px-4 py-3 rounded-t-xl font-bold transition-colors">
+                    1. 오함마 캔들 (바닥 변곡)
+                </button>
+                <button onclick="showTab('strategy2')" class="tab-btn flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-3 rounded-t-xl font-bold transition-colors">
+                    2. 갭상승 패턴 (추세 확정)
+                </button>
+                <button onclick="showTab('strategy3')" class="tab-btn flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-3 rounded-t-xl font-bold transition-colors">
+                    3. 매집 돌파 (확장 캔들)
+                </button>
+            </div>
+
+            <!-- Tab Contents -->
+            <div class="glass-panel p-6 md:p-8 rounded-b-xl rounded-tr-xl">
+                
+                <!-- Strategy 1 -->
+                <div id="strategy1" class="tab-content block">
+                    <div class="flex flex-col lg:flex-row gap-8 items-center">
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 text-blue-400">오함마 (망치형) 캔들</h3>
+                            <ul class="space-y-3 text-slate-300 mb-6 list-disc list-inside">
+                                <li><strong>조건:</strong> 미장 개장 후 약 2시간 경과 (글로벌 기관 포지션 구축 완료 시점)</li>
+                                <li><strong>현상:</strong> 강한 하락 추세 중 꼬리가 50% 이상 되돌림을 주며 마감한 긴 아래꼬리 캔들 등장</li>
+                                <li><strong>의미:</strong> 진짜 바닥을 찍었을 가능성이 매우 높은 변곡점 신호</li>
+                            </ul>
+                            <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+                                <p class="font-semibold text-yellow-400"><i class="fas fa-bolt mr-2"></i> Action Plan</p>
+                                <p class="text-slate-300 mt-2">해당 캔들 <strong>마감을 반드시 확인</strong> 후 다음 캔들에서 매수 진입. 손절은 망치형 캔들의 저점(또는 꼬리 길이의 배수만큼 여유 있게)으로 설정.</p>
+                            </div>
+                        </div>
+                        <!-- UI Visualization (CSS Candle) -->
+                        <div class="w-full lg:w-1/3 flex justify-center items-end h-48 bg-slate-900/80 rounded-xl p-4 border border-slate-700">
+                            <!-- Descending Candles -->
+                            <div class="flex flex-col items-center w-8 mx-1" style="height: 80%;">
+                                <div class="w-0.5 bg-blue-500 h-2"></div><div class="w-full bg-blue-500 h-10 rounded-sm"></div><div class="w-0.5 bg-blue-500 h-4"></div>
+                            </div>
+                            <div class="flex flex-col items-center w-8 mx-1 mt-8" style="height: 60%;">
+                                <div class="w-0.5 bg-blue-500 h-1"></div><div class="w-full bg-blue-500 h-12 rounded-sm"></div><div class="w-0.5 bg-blue-500 h-3"></div>
+                            </div>
+                            <!-- Hammer Candle (Highlight) -->
+                            <div class="flex flex-col items-center w-8 mx-2 relative animate-pulse" style="height: 75%;">
+                                <div class="w-0.5 bg-red-500 h-2"></div>
+                                <div class="w-full bg-red-500 h-8 rounded-sm shadow-[0_0_15px_rgba(239,68,68,0.4)]"></div>
+                                <div class="w-0.5 bg-red-500 h-24"></div> <!-- 50% 이상 긴 아래꼬리 -->
+                                <div class="absolute -bottom-8 text-xs text-red-400 font-bold whitespace-nowrap">존 윅 (반격)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategy 2 -->
+                <div id="strategy2" class="tab-content hidden">
+                    <div class="flex flex-col lg:flex-row gap-8 items-center">
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 text-purple-400">갭상승 후 시가 양봉</h3>
+                            <ul class="space-y-3 text-slate-300 mb-6 list-disc list-inside">
+                                <li><strong>조건:</strong> 하락 추세 후 다음날 아침 갭상승으로 시작</li>
+                                <li><strong>확인:</strong> 1시간봉 등 시가봉이 '양봉'으로 마감하는지 확인 (음봉이면 전일 저가 트라이 가능성 있음)</li>
+                                <li><strong>의미:</strong> 어제 매수자들의 홀딩 동의 + 오늘 신규 매수세 유입 충돌 없음</li>
+                            </ul>
+                            <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+                                <p class="font-semibold text-yellow-400"><i class="fas fa-bolt mr-2"></i> Action Plan</p>
+                                <p class="text-slate-300 mt-2">시가봉이 양봉으로 마감하면 강력한 매수 신호로 판단하여 진입. 손절은 전날의 저가나 종가로 설정하여 리스크 관리.</p>
+                            </div>
+                        </div>
+                        <!-- UI Visualization (CSS Candle) -->
+                        <div class="w-full lg:w-1/3 flex justify-center items-end h-48 bg-slate-900/80 rounded-xl p-4 border border-slate-700 relative">
+                            <!-- Previous Close -->
+                            <div class="flex flex-col items-center w-8 mx-2" style="height: 40%;">
+                                <div class="w-0.5 bg-blue-500 h-2"></div><div class="w-full bg-blue-500 h-10 rounded-sm"></div><div class="w-0.5 bg-blue-500 h-2"></div>
+                            </div>
+                            <!-- Gap Area -->
+                            <div class="absolute left-1/2 top-[55%] transform -translate-x-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold border-t border-b border-dashed border-slate-500 py-1 px-4">GAP (빈 공간)</div>
+                            <!-- Gap up Open (Red) -->
+                            <div class="flex flex-col items-center w-8 mx-2 mb-20 animate-pulse" style="height: 40%;">
+                                <div class="w-0.5 bg-red-500 h-3"></div>
+                                <div class="w-full bg-red-500 h-14 rounded-sm shadow-[0_0_15px_rgba(239,68,68,0.4)]"></div>
+                                <div class="w-0.5 bg-red-500 h-2"></div>
+                                <div class="absolute -top-6 text-xs text-red-400 font-bold whitespace-nowrap">시가 위(양봉)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategy 3 -->
+                <div id="strategy3" class="tab-content hidden">
+                    <div class="flex flex-col lg:flex-row gap-8 items-center">
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 text-green-400">매집 돌파 (꼬리 없는 장대양봉)</h3>
+                            <ul class="space-y-3 text-slate-300 mb-6 list-disc list-inside">
+                                <li><strong>현상:</strong> 작은 봉들로 횡보(매집)하다가 시가가 곧 저가인(아래꼬리가 없는) 큰 장대양봉 출현</li>
+                                <li><strong>의미:</strong> 마켓메이커 한 명의 강력한 의도로, 반대 의견 없이 위로 쏘겠다는 시그널</li>
+                            </ul>
+                            <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+                                <p class="font-semibold text-yellow-400"><i class="fas fa-bolt mr-2"></i> Action Plan</p>
+                                <p class="text-slate-300 mt-2">진행 중 진입 금지. <strong>반드시 마감을 확인</strong>하고 다음 캔들에서 진입. 손절은 해당 장대양봉의 저가 이탈 시. 목표 수익비는 최소 2:1 설정.</p>
+                            </div>
+                        </div>
+                        <!-- UI Visualization (CSS Candle) -->
+                        <div class="w-full lg:w-1/3 flex justify-center items-end h-48 bg-slate-900/80 rounded-xl p-4 border border-slate-700">
+                            <!-- Consolidation (매집 구간) -->
+                            <div class="flex flex-col items-center w-5 mx-1 mb-6" style="height: 20%;"><div class="w-0.5 bg-red-500 h-2"></div><div class="w-full bg-red-500 h-4 rounded-sm"></div><div class="w-0.5 bg-red-500 h-1"></div></div>
+                            <div class="flex flex-col items-center w-5 mx-1 mb-5" style="height: 20%;"><div class="w-0.5 bg-blue-500 h-1"></div><div class="w-full bg-blue-500 h-5 rounded-sm"></div><div class="w-0.5 bg-blue-500 h-2"></div></div>
+                            <div class="flex flex-col items-center w-5 mx-1 mb-6" style="height: 15%;"><div class="w-0.5 bg-red-500 h-1"></div><div class="w-full bg-red-500 h-3 rounded-sm"></div><div class="w-0.5 bg-red-500 h-1"></div></div>
+                            <!-- Marubozu / Big Body (확장 캔들) -->
+                            <div class="flex flex-col items-center w-10 mx-2 mb-5 animate-pulse relative" style="height: 75%;">
+                                <div class="w-0.5 bg-red-500 h-2"></div> <!-- 매우 짧은 위꼬리 -->
+                                <div class="w-full bg-red-500 h-full rounded-sm shadow-[0_0_15px_rgba(239,68,68,0.4)]"></div> <!-- 압도적인 몸통 -->
+                                <!-- 아래꼬리 없음 (시가=저가) -->
+                                <div class="absolute -bottom-8 text-xs text-red-400 font-bold whitespace-nowrap">아래꼬리 無</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Summary -->
+    <footer class="border-t border-slate-800 bg-slate-900/50 py-10 text-center">
+        <div class="max-w-3xl mx-auto px-4">
+            <h3 class="text-2xl font-bold text-white mb-4">💡 핵심 요약</h3>
+            <p class="text-slate-400 leading-relaxed mb-6">
+                대부분의 초보자가 보조 지표에만 매달릴 때, 성공하는 트레이더는 <strong>'캔들의 꼬리'</strong>를 통해 세력과 대중의 심리를 읽습니다. 
+                꼬리를 단순한 흔적이 아닌 <strong>'강력한 매물대이자 목표가'</strong>로 인식할 때 트레이딩의 본질이 보입니다.
+            </p>
+            <p class="text-sm text-slate-500">본 문서는 기획자 관점에서 직관적 정보 전달을 목적으로 재구성되었습니다.</p>
+        </div>
+    </footer>
+
+    <!-- Simple Script for Tabs -->
+    <script>
+        function showTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+            
+            // Reset all buttons styling
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('bg-blue-600', 'text-white');
+                el.classList.add('bg-slate-800', 'text-slate-300');
+            });
+
+            // Show selected content
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById(tabId).classList.add('block');
+
+            // Highlight selected button
+            const activeBtn = event.currentTarget || event.target;
+            activeBtn.classList.remove('bg-slate-800', 'text-slate-300');
+            activeBtn.classList.add('bg-blue-600', 'text-white');
+        }
+    </script>
+</body>
+</html>
