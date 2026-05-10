@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서약서 (BẢN CAM KẾT)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f3f4f6; /* bg-gray-100 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* 모바일 화면을 꽉 채우면서 PC에서는 종이 문서처럼 보이게 하는 컨테이너 */
+        .document-container {
+            background-color: white;
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+        
+        @media (min-width: 640px) {
+            .document-container {
+                margin: 2rem auto;
+                min-height: auto;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+                border-radius: 0.5rem;
+            }
+        }
+
+        .clause-title {
+            word-break: keep-all;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <main class="document-container px-5 py-10 sm:px-12 sm:py-16">
+        
+        <!-- Header Section -->
+        <header class="text-center mb-10 border-b-2 border-gray-800 pb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-2">서 약 서</h1>
+            <h2 class="text-xl sm:text-2xl font-medium text-gray-500">(BẢN CAM KẾT)</h2>
+        </header>
+
+        <!-- Information Section -->
+        <section class="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-10 space-y-3 sm:text-lg">
+            <div class="grid grid-cols-[1fr_2fr] gap-2 items-center">
+                <span class="font-bold text-gray-700">서약인 (남편)<br><span class="text-sm font-normal text-gray-500 italic">Người cam kết (Chồng)</span></span>
+                <span class="font-medium text-lg border-b border-gray-400 pb-1 w-full">[본인 이름 기재 / Điền tên chồng]</span>
+            </div>
+            <div class="grid grid-cols-[1fr_2fr] gap-2 items-center">
+                <span class="font-bold text-gray-700">배우자 (아내)<br><span class="text-sm font-normal text-gray-500 italic">Vợ</span></span>
+                <span class="font-medium text-lg border-b border-gray-400 pb-1 w-full">[아내 이름 기재 / Điền tên vợ]</span>
+            </div>
+            <div class="grid grid-cols-[1fr_2fr] gap-2 items-center">
+                <span class="font-bold text-gray-700">대상 자녀<br><span class="text-sm font-normal text-gray-500 italic">Con chung</span></span>
+                <span class="font-medium text-lg border-b border-gray-400 pb-1 w-full">[아들 이름 기재 / Tên con trai]</span>
+            </div>
+        </section>
+
+        <!-- Preamble -->
+        <section class="mb-10 text-justify leading-relaxed sm:text-lg">
+            <p class="mb-3">본인 <strong>[본인 이름]</strong>은(는) 아내 <strong>[아내 이름]</strong>에게 우리 아이 민혁이의 안정적인 성장을 위해 다음 사항을 굳게 약속하며 본 서약서를 작성합니다.</p>
+            <p class="text-gray-600 italic text-sm sm:text-base">
+                (Tôi, <strong>[Tên chồng]</strong>, lập bản cam kết này để gửi tới vợ tôi là <strong>[Tên vợ]</strong>, với lời hứa kiên quyết về những điều khoản dưới đây nhằm đảm bảo sự phát triển ổn định của con trai chúng ta.)
+            </p>
+        </section>
+
+        <!-- Clauses Section -->
+        <section class="space-y-10">
+            
+            <!-- Clause 1 -->
+            <article>
+                <h3 class="text-lg sm:text-xl font-bold mb-2 clause-title text-blue-900">1. 자녀의 단기 한국 체류 및 양육</h3>
+                <p class="mb-2 leading-relaxed">본인은 (총 3개월간) 아들 민혁이를 베트남에서 한국으로 데려가, 본인과 한국의 가족들(조부모 등)의 전적인 지원과 책임하에 안전하고 건강하게 돌볼 것을 약속합니다.</p>
+                <div class="bg-gray-50 p-4 rounded-md border-l-4 border-blue-200">
+                    <h4 class="font-bold text-gray-700 mb-1 text-sm sm:text-base">1. Việc con lưu trú ngắn hạn và nuôi dưỡng tại Hàn Quốc:</h4>
+                    <p class="text-gray-600 italic text-sm sm:text-base leading-relaxed">Tôi cam kết sẽ đưa con trai từ Việt Nam về Hàn Quốc (trong tổng thời gian 3 tháng) và sẽ chăm sóc con an toàn, khỏe mạnh dưới sự hỗ trợ và chịu trách nhiệm hoàn toàn của tôi cùng gia đình tại Hàn Quốc (ông bà nội, v.v.).</p>
+                </div>
+            </article>
+
+            <!-- Clause 2 -->
+            <article>
+                <h3 class="text-lg sm:text-xl font-bold mb-2 clause-title text-blue-900">2. 3개월 후 베트남 귀환 의무</h3>
+                <p class="mb-2 leading-relaxed">위 1항에 명시된 3개월의 양육 기간이 종료되는 즉시, 본인은 어떠한 핑계나 이유를 막론하고 민혁이를 다시 베트남으로 데려와 아내에게 무사히 인계할 것을 서약합니다.</p>
+                <div class="bg-gray-50 p-4 rounded-md border-l-4 border-blue-200">
+                    <h4 class="font-bold text-gray-700 mb-1 text-sm sm:text-base">2. Nghĩa vụ đưa con trở lại Việt Nam sau 3 tháng:</h4>
+                    <p class="text-gray-600 italic text-sm sm:text-base leading-relaxed">Ngay khi thời gian 3 tháng nuôi dưỡng nêu tại Điều 1 kết thúc, tôi cam kết sẽ đưa con trở lại Việt Nam và giao lại cho vợ tôi một cách an toàn, bất luận với lý do hay cái cớ gì.</p>
+                </div>
+            </article>
+
+            <!-- Clause 3 (Core) -->
+            <article>
+                <h3 class="text-lg sm:text-xl font-bold mb-2 clause-title text-red-600">3. 약속 불이행 시의 모든 권한 포기 (핵심 서약)</h3>
+                <p class="mb-2 leading-relaxed">만약 본인이 위 2항의 '3개월 후 귀환' 약속을 어기거나 기일을 지키지 않을 경우, 본인은 민혁이에 대한 <strong class="text-red-600 underline underline-offset-4 decoration-2">친권 및 양육권을 포함한 아버지로서의 모든 법적, 도의적 권한을 즉시 포기</strong>할 것을 맹세합니다. 향후 아내가 단독 양육자로 지정되는 것에 동의하며, 이에 대한 아내의 어떠한 법적 조치에도 절대 이의를 제기하지 않겠습니다.</p>
+                <div class="bg-red-50 p-4 rounded-md border-l-4 border-red-300">
+                    <h4 class="font-bold text-gray-800 mb-1 text-sm sm:text-base">3. Từ bỏ mọi quyền lợi nếu không thực hiện đúng cam kết (Cam kết cốt lõi):</h4>
+                    <p class="text-gray-700 italic text-sm sm:text-base leading-relaxed">Nếu tôi vi phạm hoặc không đúng hạn lời hứa "đưa con trở lại sau 3 tháng" tại Điều 2, tôi xin thề sẽ <strong class="text-red-700">từ bỏ ngay lập tức mọi quyền hạn pháp lý và đạo lý của một người cha đối với con, bao gồm cả quyền làm cha và quyền nuôi dưỡng</strong>. Tôi đồng ý để vợ trở thành người nuôi con duy nhất trong tương lai và sẽ tuyệt đối không khiếu nại hay phản đối bất kỳ biện pháp pháp lý nào của vợ liên quan đến vấn đề này.</p>
+                </div>
+            </article>
+
+            <!-- Clause 4 -->
+            <article>
+                <h3 class="text-lg sm:text-xl font-bold mb-2 clause-title text-blue-900">4. 향후 순환 양육 제안 (3개월 교대)</h3>
+                <p class="mb-2 leading-relaxed">본인은 이번 3개월의 약속 이행을 시작으로, 향후 민혁이의 양육 환경을 위해 아내가 베트남에서 3개월을 케어한 후, 다시 본인이 한국에서 3개월을 돌보는 형태의 '3개월 교대 순환 양육' 방식을 정식 제안하며, 이 약속 또한 성실히 이행할 것을 다짐합니다.</p>
+                <div class="bg-gray-50 p-4 rounded-md border-l-4 border-blue-200">
+                    <h4 class="font-bold text-gray-700 mb-1 text-sm sm:text-base">4. Đề xuất phương án nuôi dưỡng luân phiên trong tương lai (Mỗi người 3 tháng):</h4>
+                    <p class="text-gray-600 italic text-sm sm:text-base leading-relaxed">Bắt đầu từ việc thực hiện đúng lời hứa 3 tháng lần này, vì môi trường phát triển của con trong tương lai, tôi chính thức đề xuất phương án "nuôi dưỡng luân phiên mỗi người 3 tháng", trong đó vợ sẽ chăm sóc con 3 tháng tại Việt Nam, sau đó tôi sẽ chăm sóc con 3 tháng tại Hàn Quốc. Tôi xin hứa sẽ thực hiện nghiêm túc cam kết này.</p>
+                </div>
+            </article>
+
+            <!-- Clause 5 -->
+            <article>
+                <h3 class="text-lg sm:text-xl font-bold mb-2 clause-title text-blue-900">5. 항공권 및 양육 경비 부담</h3>
+                <p class="mb-2 leading-relaxed">민혁이의 한국 이동 및 베트남 귀환을 위한 모든 항공권 비용과 한국 체류 기간(3개월) 동안 발생하는 민혁이에 대한 모든 양육, 의료, 생활 경비는 전적으로 본인(남편)이 부담할 것을 약속합니다.</p>
+                <div class="bg-gray-50 p-4 rounded-md border-l-4 border-blue-200">
+                    <h4 class="font-bold text-gray-700 mb-1 text-sm sm:text-base">5. Chịu trách nhiệm chi trả vé máy bay và chi phí nuôi dưỡng:</h4>
+                    <p class="text-gray-600 italic text-sm sm:text-base leading-relaxed">Tôi cam kết sẽ chi trả toàn bộ chi phí vé máy bay để đưa con trai di chuyển sang Hàn Quốc và trở lại Việt Nam, cũng như mọi chi phí nuôi dưỡng, y tế và sinh hoạt phát sinh cho con trong thời gian con lưu trú tại Hàn Quốc (3 tháng).</p>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- Closing -->
+        <section class="mt-12 mb-16 text-center">
+            <p class="font-medium text-gray-800 leading-relaxed sm:text-lg">
+                본 서약서는 어떠한 강압 없이 본인의 자유롭고 확고한 의사에 따라 작성되었음을 명확히 밝힙니다.
+            </p>
+            <p class="text-gray-600 italic text-sm sm:text-base mt-2 px-4">
+                (Tôi xin khẳng định rõ rằng bản cam kết này được lập ra dựa trên ý chí tự do và kiên định của bản thân, hoàn toàn không bị ép buộc dưới bất kỳ hình thức nào.)
+            </p>
+        </section>
+
+        <!-- Signature Section -->
+        <footer class="mt-16 pt-10 border-t border-gray-300">
+            <div class="flex flex-col items-end space-y-6">
+                <div class="text-lg font-medium tracking-widest text-gray-700">
+                    202&nbsp;&nbsp;&nbsp;년(Năm)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;월(Tháng)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일(Ngày)
+                </div>
+                <div class="flex items-end mt-8">
+                    <div class="text-lg font-bold mr-4 text-gray-800">
+                        서약인 (Người cam kết) :
+                    </div>
+                    <div class="w-48 sm:w-64 border-b-2 border-gray-800 h-8 relative">
+                        <span class="absolute right-0 bottom-1 text-gray-400 text-sm italic">(서명 또는 인 / Ký tên)</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+</body>
+</html>
