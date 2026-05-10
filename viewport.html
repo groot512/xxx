@@ -6,7 +6,7 @@
     <title>서약서 (BẢN CAM KẾT)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
         
         body {
             font-family: 'Noto Sans KR', sans-serif;
@@ -51,23 +51,23 @@
         <section class="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-10 space-y-3 sm:text-lg">
             <div class="grid grid-cols-[1fr_2fr] gap-2 items-center">
                 <span class="font-bold text-gray-700">서약인 (남편)<br><span class="text-sm font-normal text-gray-500 italic">Người cam kết (Chồng)</span></span>
-                <span class="font-medium text-lg border-b border-gray-400 pb-1 w-full">[본인 이름 기재 / Điền tên chồng]</span>
+                <span class="text-lg border-b border-gray-400 pb-1 w-full text-gray-400 font-light">[본인 이름 기재 / Điền tên chồng]</span>
             </div>
             <div class="grid grid-cols-[1fr_2fr] gap-2 items-center">
                 <span class="font-bold text-gray-700">배우자 (아내)<br><span class="text-sm font-normal text-gray-500 italic">Vợ</span></span>
-                <span class="font-medium text-lg border-b border-gray-400 pb-1 w-full">[아내 이름 기재 / Điền tên vợ]</span>
+                <span class="text-lg border-b border-gray-400 pb-1 w-full text-gray-400 font-light">[아내 이름 기재 / Điền tên vợ]</span>
             </div>
             <div class="grid grid-cols-[1fr_2fr] gap-2 items-center">
                 <span class="font-bold text-gray-700">대상 자녀<br><span class="text-sm font-normal text-gray-500 italic">Con chung</span></span>
-                <span class="font-medium text-lg border-b border-gray-400 pb-1 w-full">[아들 이름 기재 / Tên con trai]</span>
+                <span class="text-lg border-b border-gray-400 pb-1 w-full text-gray-400 font-light">[아들 이름 기재 / Tên con trai]</span>
             </div>
         </section>
 
         <!-- Preamble -->
         <section class="mb-10 text-justify leading-relaxed sm:text-lg">
-            <p class="mb-3">본인 <strong>[본인 이름]</strong>은(는) 아내 <strong>[아내 이름]</strong>에게 우리 아이 민혁이의 안정적인 성장을 위해 다음 사항을 굳게 약속하며 본 서약서를 작성합니다.</p>
+            <p class="mb-3">본인 <strong class="text-gray-400 font-light underline underline-offset-4 decoration-1">[본인 이름]</strong>은(는) 아내 <strong class="text-gray-400 font-light underline underline-offset-4 decoration-1">[아내 이름]</strong>에게 우리 아이 민혁이의 안정적인 성장을 위해 다음 사항을 굳게 약속하며 본 서약서를 작성합니다.</p>
             <p class="text-gray-600 italic text-sm sm:text-base">
-                (Tôi, <strong>[Tên chồng]</strong>, lập bản cam kết này để gửi tới vợ tôi là <strong>[Tên vợ]</strong>, với lời hứa kiên quyết về những điều khoản dưới đây nhằm đảm bảo sự phát triển ổn định của con trai chúng ta.)
+                (Tôi, <strong class="text-gray-400 font-light underline underline-offset-4 decoration-1">[Tên chồng]</strong>, lập bản cam kết này để gửi tới vợ tôi là <strong class="text-gray-400 font-light underline underline-offset-4 decoration-1">[Tên vợ]</strong>, với lời hứa kiên quyết về những điều khoản dưới đây nhằm đảm bảo sự phát triển ổn định của con trai chúng ta.)
             </p>
         </section>
 
@@ -139,16 +139,34 @@
         <!-- Signature Section -->
         <footer class="mt-16 pt-10 border-t border-gray-300">
             <div class="flex flex-col items-end space-y-6">
-                <div class="text-lg font-medium tracking-widest text-gray-700">
+                <!-- Date -->
+                <div class="text-lg font-medium tracking-widest text-gray-700 w-full text-right">
                     202&nbsp;&nbsp;&nbsp;년(Năm)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;월(Tháng)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일(Ngày)
                 </div>
-                <div class="flex items-end mt-8">
-                    <div class="text-lg font-bold mr-4 text-gray-800">
-                        서약인 (Người cam kết) :
+                
+                <!-- Signatures Grid -->
+                <div class="w-full flex flex-col sm:flex-row justify-end gap-6 sm:gap-12 mt-4">
+                    
+                    <!-- 남편 서명 -->
+                    <div class="flex items-end justify-end w-full sm:w-auto">
+                        <div class="text-lg font-bold mr-3 text-gray-800 whitespace-nowrap">
+                            서약인 (Chồng) :
+                        </div>
+                        <div class="w-48 border-b-2 border-gray-800 h-8 relative">
+                            <span class="absolute right-0 bottom-1 text-gray-400 text-sm italic">(서명 / Ký tên)</span>
+                        </div>
                     </div>
-                    <div class="w-48 sm:w-64 border-b-2 border-gray-800 h-8 relative">
-                        <span class="absolute right-0 bottom-1 text-gray-400 text-sm italic">(서명 또는 인 / Ký tên)</span>
+
+                    <!-- 아내 서명 -->
+                    <div class="flex items-end justify-end w-full sm:w-auto mt-4 sm:mt-0">
+                        <div class="text-lg font-bold mr-3 text-gray-800 whitespace-nowrap">
+                            배우자 (Vợ) :
+                        </div>
+                        <div class="w-48 border-b-2 border-gray-800 h-8 relative">
+                            <span class="absolute right-0 bottom-1 text-gray-400 text-sm italic">(서명 / Ký tên)</span>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </footer>
