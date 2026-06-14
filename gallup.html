@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국갤럽 점·사주 인식 및 유료 경험 조사 (1991-2026)</title>
+    <style>
+        :root {
+            --primary-color: #007aff;
+            --secondary-color: #5856d6;
+            --accent-color: #eb5545;
+            --bg-color: #f5f5f7;
+            --card-bg: #ffffff;
+            --text-main: #1d1d1f;
+            --text-sub: #86868b;
+            --border-color: #e5e5ea;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 16px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding: 12px 0;
+        }
+
+        header h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        header p {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        /* 1번 차트: 연도별 세로 막대 */
+        .chart-container-v {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 140px;
+            padding-top: 20px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .chart-bar-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 25%;
+        }
+
+        .bar-value {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+        }
+
+        .chart-bar {
+            width: 32px;
+            background: linear-gradient(to top, #0051ff, var(--primary-color));
+            border-radius: 6px 6px 0 0;
+        }
+
+        .bar-label {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* 2번 차트: 가로 막대형 (유료 결제 경험) */
+        .chart-container-h {
+            margin-bottom: 12px;
+            padding-top: 8px;
+        }
+
+        .row-bar-wrapper {
+            margin-bottom: 14px;
+        }
+
+        .row-bar-wrapper:last-child {
+            margin-bottom: 4px;
+        }
+
+        .row-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .row-label {
+            color: var(--text-main);
+        }
+
+        .row-value {
+            font-weight: 700;
+            color: #2c2c2e;
+        }
+
+        .bar-bg {
+            width: 100%;
+            height: 16px;
+            background-color: var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 8px;
+            background: linear-gradient(to right, #448aff, var(--primary-color));
+        }
+
+        /* 리스트 및 요약 스타일 */
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            font-size: 0.9rem;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .info-list li:first-child {
+            padding-top: 0;
+        }
+
+        .label {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .value {
+            font-weight: 600;
+            color: #3a3a3c;
+        }
+
+        .bullet-desc {
+            font-size: 0.85rem;
+            color: #515154;
+            margin-top: 10px;
+            padding-left: 4px;
+        }
+
+        .bullet-desc div {
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 12px;
+        }
+
+        .bullet-desc div::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--text-sub);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>점·사주 관련 인식 조사</h1>
+        <p>출처: 한국갤럽 데일리 오피니언 (2026년 3월 조사)</p>
+    </header>
+
+    <div class="card">
+        <div class="card-title">점·사주 "믿는다" 추이</div>
+        <div class="chart-container-v">
+            <div class="chart-bar-wrapper">
+                <span class="bar-value">40%</span>
+                <div class="chart-bar" style="height: 100px;"></div>
+                <span class="bar-label">1991년</span>
+            </div>
+            <div class="chart-bar-wrapper">
+                <span class="bar-value" style="color: var(--text-sub);">31%</span>
+                <div class="chart-bar" style="height: 77.5px; background: #aeaeaf;"></div>
+                <span class="bar-label">2009년</span>
+            </div>
+            <div class="chart-bar-wrapper">
+                <span class="bar-value">40%</span>
+                <div class="chart-bar" style="height: 100px;"></div>
+                <span class="bar-label">2026년</span>
+            </div>
+        </div>
+        <div class="bullet-desc">
+            <div>남성(28%)보다 <strong>여성(50%)</strong>의 신뢰도가 훨씬 높게 나타남</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title" style="border-left-color: var(--accent-color);">직접 돈 내고 점·사주 본 경험</div>
+        <div class="chart-container-h">
+            <div class="row-bar-wrapper">
+                <div class="row-info">
+                    <span class="row-label">대한민국 성인 전체</span>
+                    <span class="row-value">40%</span>
+                </div>
+                <div class="bar-bg">
+                    <div class="bar-fill" style="width: 40%;"></div>
+                </div>
+            </div>
+            <div class="row-bar-wrapper">
+                <div class="row-info">
+                    <span class="row-label" style="color: var(--text-sub);">20대 남성 (최저 집단)</span>
+                    <span class="row-value" style="color: var(--text-sub);">8%</span>
+                </div>
+                <div class="bar-bg">
+                    <div class="bar-fill" style="width: 8%; background: #aeaeaf;"></div>
+                </div>
+            </div>
+            <div class="row-bar-wrapper">
+                <div class="row-info">
+                    <span class="row-label">60대 이상 여성 (최고 집단)</span>
+                    <span class="row-value" style="color: var(--accent-color);">71%</span>
+                </div>
+                <div class="bar-bg">
+                    <div class="bar-fill" style="width: 71%; background: linear-gradient(to right, #ff6b6b, var(--accent-color));"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bullet-desc" style="margin-top: 14px; border-top: 1px dashed var(--border-color); padding-top: 10px;">
+            <div>전체 유료 경험률(40%)은 지난 30여 년간 큰 변화 없이 유지됨</div>
+            <div>유료 경험자 중 <strong>59%가 "현실과 일치했다"</strong>고 답했으며, <strong>71%가 "결정 시 역술인의 말을 참고했다"</strong>고 응답함</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">운명과 민간 풍속에 대한 견해</div>
+        <ul class="info-list">
+            <li>
+                <span class="label">운명은 타고나는 것 (결정론)</span>
+                <span class="value">20%</span>
+            </li>
+            <li>
+                <span class="label">노력·능력에 따른 것 (능력론)</span>
+                <span class="value">37%</span>
+            </li>
+            <li>
+                <span class="label">타고난 운명 반 + 노력 반</span>
+                <span class="value" style="color: var(--primary-color);">41%</span>
+            </li>
+            <li>
+                <span class="label">궁합 나쁜 결혼 반대</span>
+                <span class="value">39%</span>
+            </li>
+            <li>
+                <span class="label">명당자리 자손 번영 신뢰</span>
+                <span class="value">46%</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card" style="background: linear-gradient(135deg, #ffffff, #f2f7ff);">
+        <div class="card-title" style="border-left-color: var(--secondary-color);">인공지능(AI) 운세 경험</div>
+        <ul class="info-list">
+            <li>
+                <span class="label">AI로 사주·운세 본 적 있다</span>
+                <span class="value" style="color: var(--secondary-color); font-size: 1.1rem;">26%</span>
+            </li>
+        </ul>
+        <div class="bullet-desc">
+            <div><strong>20대 응답자의 46%</strong>가 AI 서비스를 통한 사주풀이를 경험하여 젊은 층의 새로운 자아 탐구 트렌드로 정착 중임을 보여줌</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
