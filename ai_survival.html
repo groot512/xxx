@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 에이전트 시대: 새로운 생존 방정식</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <!-- Chosen Palette: "Cyber Neon & Deep Tech" - Background: #0F172A, Primary: #38BDF8, Secondary: #F472B6, Accent: #4ADE80, Warning: #FBBF24 -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap');
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #0F172A;
+            color: #F8FAFC;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .gradient-border {
+            border: 1px solid transparent;
+            background-image: linear-gradient(#1E293B, #1E293B), linear-gradient(to right, #38BDF8, #F472B6);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+        }
+        .metric-card {
+            background: #1E293B;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #38BDF8;
+            border-radius: 50%;
+            position: absolute;
+            left: -6px;
+            top: 10px;
+        }
+        .timeline-line {
+            border-left: 2px solid #334155;
+            padding-left: 20px;
+            margin-left: 10px;
+            position: relative;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Narrative Plan Summary: 
+         1. Introduction: Transition from Scarcity to Intelligence Abundance.
+         2. The Value Shift: Visualizing the collapse of human knowledge labor value.
+         3. Economic Paradigm: Shift from Labor Income to Capital/Intelligence Income.
+         4. Institutional Solutions: Comparing UBS, UBE, and UBC.
+         5. Technical Frontier: Inference-centric hardware evolution.
+         6. Strategic Calendar: Macro events to watch for portfolio safety.
+         7. Life-Cycle Strategy: Tailored investment and education paths.
+    -->
+
+    <!-- Visualization Choice Summary:
+         - Intelligence Scarcity vs Abundance: Line Chart (Chart.js) to show supply-demand cross.
+         - Income Structure: Donut Chart (Chart.js) for Labor vs Capital ratio shift.
+         - Institutional Models: Feature Cards (HTML/CSS) for conceptual comparison.
+         - Inference Cost Trends: Bar Chart (Chart.js) Training vs Inference.
+         - Macro Calendar: Vertical Timeline (HTML/Tailwind).
+         - Life Cycle Stages: Step-process layout (HTML/Tailwind).
+         - All charts use canvas rendering. No SVG or Mermaid used.
+    -->
+
+    <nav class="sticky top-0 z-50 bg-[#0F172A]/80 backdrop-blur-md border-b border-slate-800 p-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <span class="text-xl font-extrabold text-[#38BDF8]">AI SURVIVAL</span>
+            <div class="hidden md:flex space-x-6 text-sm font-medium text-slate-400">
+                <a href="#impact" class="hover:text-[#38BDF8] transition">경제적 충격</a>
+                <a href="#income" class="hover:text-[#38BDF8] transition">소득 패러다임</a>
+                <a href="#policy" class="hover:text-[#38BDF8] transition">제도적 대안</a>
+                <a href="#strategy" class="hover:text-[#38BDF8] transition">생애주기 전략</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="max-w-6xl mx-auto px-4 py-16 text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#38BDF8] to-[#F472B6]">
+            지능의 과잉과 소득의 해체
+        </h1>
+        <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+            인류 역사상 가장 거대한 패러다임 시프트: 노동이 더 이상 생존을 보장하지 않는 '에이전틱 AI' 시대, 당신의 생존 방정식은 준비되었습니까?
+        </p>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 pb-20 space-y-24">
+        <!-- Section 1: The Impact of Intelligence Abundance -->
+        <section id="impact" class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+                <h2 class="text-3xl font-bold mb-4 flex items-center">
+                    <span class="w-2 h-8 bg-[#38BDF8] mr-3"></span> 지능 가치의 수렴
+                </h2>
+                <p class="text-slate-400 mb-6 leading-relaxed">
+                    에이전틱 AI의 등장은 인간 고유의 영역이었던 '지적 노동'의 공급을 무한대로 늘립니다. 이는 과거의 자동화와 달리 화이트칼라 노동력의 가치를 급격히 하락시킵니다. 데이터 센터 안에 노벨상급 천재들이 100만 명 상주하는 시대, 지식 노동의 가격은 $0$으로 수렴하고 있습니다.
+                </p>
+                <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                    <p class="text-sm font-semibold text-[#38BDF8] mb-1">핵심 지표: 노동 가치 하락</p>
+                    <p class="text-xs text-slate-500">인간 개발자의 코딩 생산성 대비 비용 효율성이 AI 에이전트에 의해 역전되는 지점을 시각화합니다.</p>
+                </div>
+            </div>
+            <div class="order-1 md:order-2">
+                <div class="chart-container">
+                    <canvas id="intelligenceValueChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Income Transition -->
+        <section id="income" class="space-y-12">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold mb-4">고용 소득에서 자본 소득으로</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    노동을 통한 '일시적 소득'에 의존하던 패러다임은 붕괴합니다. 기업의 성장 결실을 나누는 '자본/지능 소득'이 생존의 핵심이 됩니다.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="metric-card border-t-4 border-[#38BDF8]">
+                    <h3 class="text-xl font-bold mb-2">항상성 소득 (Permanent)</h3>
+                    <p class="text-sm text-slate-400 mb-4">투자 변동성을 이겨내고 매월 꾸준히 유입되는 현금 흐름의 구축이 필수적입니다.</p>
+                    <div class="text-3xl font-extrabold text-[#38BDF8]">50-60%</div>
+                    <div class="text-xs text-slate-500 mt-1">추천 포트폴리오 비중 (은퇴 세대)</div>
+                </div>
+                <div class="metric-card border-t-4 border-[#F472B6]">
+                    <h3 class="text-xl font-bold mb-2">지능세와 기본 소득</h3>
+                    <p class="text-sm text-slate-400 mb-4">국가 차원에서 무한 공급되는 AI 지능에 세금을 부과하고 이를 분배하는 모델로 진화합니다.</p>
+                    <div class="text-3xl font-extrabold text-[#F472B6]">UBS/UBE</div>
+                    <div class="text-xs text-slate-500 mt-1">차세대 공공 서비스 모델</div>
+                </div>
+                <div class="metric-card border-t-4 border-[#4ADE80]">
+                    <h3 class="text-xl font-bold mb-2">무자본 창업</h3>
+                    <p class="text-sm text-slate-400 mb-4">AI를 레버리지하여 1인 기획자가 개발·디자인 없이 글로벌 서비스를 출시하는 기회입니다.</p>
+                    <div class="text-3xl font-extrabold text-[#4ADE80]">Downside 0</div>
+                    <div class="text-xs text-slate-500 mt-1">청년 세대의 새로운 골드러시</div>
+                </div>
+            </div>
+            <div class="chart-container md:col-span-2">
+                <canvas id="incomeRatioChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Section 3: Institutional Models (UBS, UBE, UBC) -->
+        <section id="policy" class="bg-slate-800/30 p-8 rounded-2xl border border-slate-800">
+            <h2 class="text-3xl font-bold mb-8 text-center">국가적 차원의 3대 대안 모델</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-6 rounded-xl bg-[#1E293B] relative">
+                    <div class="text-4xl mb-4">🏥</div>
+                    <h3 class="text-xl font-bold text-[#38BDF8] mb-2">UBS</h3>
+                    <p class="text-xs font-semibold mb-2 text-slate-500">Universal Basic Services</p>
+                    <p class="text-sm text-slate-400 leading-relaxed">주거, 의료를 넘어 AI 기반의 모든 필수 서비스를 무상으로 제공하여 생존 비용을 $0$에 가깝게 낮추는 모델입니다.</p>
+                </div>
+                <div class="p-6 rounded-xl bg-[#1E293B] relative">
+                    <div class="text-4xl mb-4">📈</div>
+                    <h3 class="text-xl font-bold text-[#F472B6] mb-2">UBE</h3>
+                    <p class="text-xs font-semibold mb-2 text-slate-500">Universal Basic Equity</p>
+                    <p class="text-sm text-slate-400 leading-relaxed">모든 국민에게 시장 우량 기업의 주식을 기본 자산으로 배분하여 자본 소득의 혜택을 공유하게 합니다.</p>
+                </div>
+                <div class="p-6 rounded-xl bg-[#1E293B] relative">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h3 class="text-xl font-bold text-[#4ADE80] mb-2">UBC</h3>
+                    <p class="text-xs font-semibold mb-2 text-slate-500">Universal Basic Compute</p>
+                    <p class="text-sm text-slate-400 leading-relaxed">데이터 센터의 GPU 연산력(Compute) 지분을 시민에게 나누어주어 직접 창업하거나 임대할 수 있게 합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Hardware Revolution (Training to Inference) -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="chart-container">
+                <canvas id="hardwareShiftChart"></canvas>
+            </div>
+            <div>
+                <h2 class="text-3xl font-bold mb-4">인프라의 축: 학습에서 추론으로</h2>
+                <p class="text-slate-400 mb-6 leading-relaxed">
+                    빅테크의 투자는 모델을 만드는 '학습(Training)' 단계를 넘어, 실시간으로 구동되는 '추론(Inference)' 단계로 이동 중입니다. 무거운 GPU 대신 전력 효율이 극대화된 **NPU/LPU**와 추론 특화 메모리인 **HBF**가 차세대 기술 패권을 결정할 것입니다.
+                </p>
+                <ul class="space-y-3">
+                    <li class="flex items-center text-sm">
+                        <span class="w-1.5 h-1.5 bg-[#38BDF8] rounded-full mr-3"></span>
+                        학습 단계: 대규모 자본과 고전력 소모 (NVIDIA HBM)
+                    </li>
+                    <li class="flex items-center text-sm">
+                        <span class="w-1.5 h-1.5 bg-[#F472B6] rounded-full mr-3"></span>
+                        추론 단계: 24시간 실시간 연산과 저전력 효율 (NPU/HBF)
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 5: Macro & Life Cycle Strategy -->
+        <section id="strategy" class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+                <h2 class="text-2xl font-bold mb-6">2024-2025 매크로 생존 캘린더</h2>
+                <div class="timeline-line">
+                    <div class="mb-10 relative">
+                        <div class="timeline-dot"></div>
+                        <h4 class="font-bold text-[#38BDF8]">상반기: 미·중 갈등 완화 기류</h4>
+                        <p class="text-sm text-slate-400">관세 전쟁의 일시적 휴전. 미국 쏠림에서 중국/신흥국으로의 '빈집털이' 자금 유입 가능성.</p>
+                    </div>
+                    <div class="mb-10 relative">
+                        <div class="timeline-dot bg-[#F472B6]"></div>
+                        <h4 class="font-bold text-[#F472B6]">3분기: 연준 금리 인하 사이클 종료</h4>
+                        <p class="text-sm text-slate-400">금리 인하 중단 시 기대와 현실의 괴리로 인한 환율 및 시장 변동성 극대화 주의.</p>
+                    </div>
+                    <div class="relative">
+                        <div class="timeline-dot bg-[#4ADE80]"></div>
+                        <h4 class="font-bold text-[#4ADE80]">11월: 미국 중간 선거</h4>
+                        <p class="text-sm text-slate-400">물가 안정을 위한 기습적 관세 정책 변화가 시장의 불확실성을 높이는 시기.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-6">
+                <h2 class="text-2xl font-bold mb-6">생애주기별 핵심 액션 플랜</h2>
+                <div class="metric-card">
+                    <p class="text-xs font-bold text-[#38BDF8] uppercase tracking-wider mb-1">10대~20대: 체험과 레버리지</p>
+                    <p class="text-sm text-slate-300">100개 이상의 ETF 초분산 투자로 자본 성격을 체득하고, AI를 활용한 '무자본 창업'에 시간의 10%를 투자하라.</p>
+                </div>
+                <div class="metric-card">
+                    <p class="text-xs font-bold text-[#F472B6] uppercase tracking-wider mb-1">30대~40대: 자산 스케일링</p>
+                    <p class="text-sm text-slate-300">고용 소득을 '항상성 소득' 모델로 전환하는 최적기. 공격적인 자산 배분 전략을 실행하라.</p>
+                </div>
+                <div class="metric-card">
+                    <p class="text-xs font-bold text-[#4ADE80] uppercase tracking-wider mb-1">50대~60대: 캐시플로우 수비</p>
+                    <p class="text-sm text-slate-300">자산의 60%를 방어적 자산에 배치하여 안정적인 연금 흐름을 확보하고 변동성을 차단하라.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 border-t border-slate-800 py-12 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h3 class="text-2xl font-bold mb-4">신대륙으로 승선할 준비가 되셨습니까?</h3>
+            <p class="text-slate-500 text-sm mb-8">
+                노동의 종말은 곧 '기획자'와 '전략가'들의 황금기입니다.<br>매일의 루틴을 통해 거인의 안목을 기르십시오.
+            </p>
+            <p class="text-xs text-slate-600">© 2024 AI Agent Survival Guide. Created for Future Architects.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Common Tooltip Config for Chart.js
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // Utility: Label Wrapping (16 chars)
+        function wrapLabels(labels) {
+            return labels.map(label => {
+                if (label.length <= 16) return label;
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + word).length > 16) {
+                        lines.push(currentLine.trim());
+                        currentLine = word + ' ';
+                    } else {
+                        currentLine += word + ' ';
+                    }
+                });
+                lines.push(currentLine.trim());
+                return lines;
+            });
+        }
+
+        // 1. Intelligence Value Chart (Line)
+        const ctx1 = document.getElementById('intelligenceValueChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: wrapLabels(['과거: 지능 희소', '현재: 과잉 시작', '미래: 무한 공급', '포스트 AI 시대']),
+                datasets: [
+                    {
+                        label: '인간 지능 노동 가치',
+                        data: [100, 70, 20, 5],
+                        borderColor: '#F472B6',
+                        backgroundColor: 'rgba(244, 114, 182, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'AI 지능 공급량',
+                        data: [5, 40, 150, 400],
+                        borderColor: '#38BDF8',
+                        backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    legend: { labels: { color: '#94A3B8' } },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: { display: false },
+                    x: { ticks: { color: '#94A3B8' }, grid: { color: '#334155' } }
+                }
+            }
+        });
+
+        // 2. Income Ratio Chart (Donut)
+        const ctx2 = document.getElementById('incomeRatioChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: wrapLabels(['노동 소득 (과거)', '자본 소득 (미래)', 'AI 지능 수익 (미래)']),
+                datasets: [{
+                    data: [20, 40, 40],
+                    backgroundColor: ['#334155', '#38BDF8', '#F472B6'],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#94A3B8' } },
+                    tooltip: tooltipConfig
+                },
+                cutout: '70%'
+            }
+        });
+
+        // 3. Hardware Shift Chart (Bar)
+        const ctx3 = document.getElementById('hardwareShiftChart').getContext('2d');
+        new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: wrapLabels(['Training (학습)', 'Inference (추론)']),
+                datasets: [
+                    {
+                        label: '에너지 소모량 (단위당)',
+                        data: [100, 15],
+                        backgroundColor: '#334155'
+                    },
+                    {
+                        label: '전체 시장 규모 예측',
+                        data: [40, 120],
+                        backgroundColor: '#4ADE80'
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    legend: { labels: { color: '#94A3B8' } },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: { ticks: { color: '#94A3B8' }, grid: { color: '#334155' } },
+                    x: { ticks: { color: '#94A3B8' }, grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
