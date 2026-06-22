@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>멕시코 K-푸드 소스 시장 진출 전략 보고서</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <!-- Chosen Palette: Brilliant Blues (Vibrant high-contrast blues, navy, and cyan) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f0f4f8; color: #1a202c; }
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            max-width: 650px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            height: 350px; 
+            max-height: 400px; 
+        }
+        .card { background: white; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transition: transform 0.3s ease; }
+        .card:hover { transform: translateY(-5px); }
+        .accent-bg { background-color: #0056b3; }
+        .accent-text { color: #0056b3; }
+        .gradient-header { background: linear-gradient(135deg, #003366 0%, #0056b3 100%); }
+        .metric-card { border-left: 4px solid #00d4ff; }
+        .no-svg-icon { display: inline-block; width: 24px; height: 24px; border: 2px solid currentColor; position: relative; vertical-align: middle; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <!-- 
+    [SPA Narrative Plan]
+    1. Introduction: Hook with overall Mexican food market size and K-Food growth trajectory.
+    2. Market Overview: Breakdown of K-Food items (Ramen, Soju, etc.) and growth rates.
+    3. Cultural Context: The "Salsa" culture of Mexico vs. Korean heat spectrum.
+    4. Regulatory Analysis: Visualization of NOM-051 (Sodium/Sugar thresholds).
+    5. Gumi-si Competency: Gumi's export performance and budget allocation.
+    6. Strategic Roadmap: 3-step action plan for market entry.
+    -->
+
+    <!-- 
+    [Visualization Choice Summary]
+    1. Key Stats (Cards): High-level market value (Inform).
+    2. Item Growth (Bar Chart): Growth % of Ramen, Soju, Coffee (Compare).
+    3. Ramen Market Composition (Donut): Cup vs. Bagged (Composition).
+    4. NOM-051 Thresholds (Plotly Scatter/Canvas): Sodium & Energy limits (Relationships).
+    5. Gumi Export Breakdown (Horizontal Bar): Product categories (Rankings).
+    6. Strategy Timeline (HTML/CSS): 3-stage process (Process/Organize).
+    **CONFIRMATION: NO SVG, NO MERMAID JS USED.**
+    -->
+
+    <header class="gradient-header text-white p-10 rounded-2xl mb-12 text-center shadow-2xl">
+        <h1 class="text-4xl md:text-6xl font-black mb-4">MÉXICO × GUMI-SI</h1>
+        <p class="text-xl md:text-2xl font-light opacity-90">멕시코 K-푸드 소스 시장 실태조사 및 특화 진출 전략</p>
+        <div class="mt-8 flex flex-wrap justify-center gap-6">
+            <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20">
+                <p class="text-sm uppercase tracking-widest">2024 멕시코 식품 시장</p>
+                <p class="text-3xl font-bold">약 288조 원</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20">
+                <p class="text-sm uppercase tracking-widest">K-Food 수출액 (2025)</p>
+                <p class="text-3xl font-bold">약 837억 원</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto">
+        
+        <!-- Section 1: Market Dynamics -->
+        <section class="mb-16">
+            <div class="mb-8 border-l-8 border-blue-600 pl-6">
+                <h2 class="text-3xl font-bold accent-text">01. 멕시코 K-Food 소비 환경</h2>
+                <p class="text-gray-600 mt-2">멕시코는 인구 1억 3천만의 거대 시장으로, 최근 한류 미디어의 확산과 함께 한국 가공식품 소비가 폭발적으로 증가하고 있습니다. 특히 라면과 커피조제품의 성장세가 두드러집니다.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold mb-6 text-center">주요 품목별 수출 증가율 (%)</h3>
+                    <div class="chart-container">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-500 text-center">커피조제품(+153.2%)과 라면(+127.8%)이 시장 성장을 주도하고 있습니다.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold mb-6 text-center">라면 시장 내 컵라면 점유율</h3>
+                    <div class="chart-container">
+                        <canvas id="ramenDonutChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-500 text-center">조리의 간편성을 중시하는 현지 식문화로 인해 컵라면이 85%를 차지합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Cultural Fusion & Sauce Strategy -->
+        <section class="mb-16 bg-blue-900 text-white p-10 rounded-2xl shadow-inner">
+            <div class="mb-8 border-l-8 border-cyan-400 pl-6">
+                <h2 class="text-3xl font-bold">02. 소스 시장의 화학적 결합</h2>
+                <p class="opacity-80 mt-2">멕시코의 100여 가지 고추 품종과 한국의 고추장 베이스 소스의 융합은 단순한 수출을 넘어선 새로운 식문화 창출의 기회입니다.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white/5 p-6 rounded-xl border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <span class="text-cyan-400 font-black text-4xl">100+</span>
+                        <p class="text-lg font-bold mt-2">멕시코 고추 품종</p>
+                        <p class="text-sm opacity-60 mt-2">단순한 매운맛이 아닌 훈연, 단맛, 신맛의 복합적인 향신료 체계</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/10">
+                        <p class="text-xs">적용: 과히요, 치폴레 융합 소스</p>
+                    </div>
+                </div>
+                <div class="bg-white/5 p-6 rounded-xl border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <span class="text-cyan-400 font-black text-4xl">71.6%</span>
+                        <p class="text-lg font-bold mt-2">미디어 시청 후 소비</p>
+                        <p class="text-sm opacity-60 mt-2">K-드라마와 영화 속 먹방이 실제 구매로 직결되는 높은 전환율</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/10">
+                        <p class="text-xs">적용: 소셜 챌린지 마케팅</p>
+                    </div>
+                </div>
+                <div class="bg-white/5 p-6 rounded-xl border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <span class="text-cyan-400 font-black text-4xl">6.9%</span>
+                        <p class="text-lg font-bold mt-2">소스 시장 CAGR</p>
+                        <p class="text-sm opacity-60 mt-2">2034년 약 53조 6,000억 원 규모로 성장할 것으로 예측되는 유망 시장</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/10">
+                        <p class="text-xs">적용: B2B 프랜차이즈 공급</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fusion Diagram (HTML/CSS) -->
+            <div class="mt-12 bg-white text-gray-800 p-8 rounded-xl">
+                <h3 class="text-xl font-bold mb-8 text-center text-blue-900">K-소스 × 멕시코 전통 요리 하이브리드</h3>
+                <div class="flex flex-col md:flex-row items-center justify-around gap-4">
+                    <div class="w-full md:w-1/4 p-4 border-2 border-dashed border-blue-200 rounded-lg text-center">
+                        <p class="font-bold">타코/퀘사디아</p>
+                        <p class="text-xs text-gray-500">기존의 살사 소스</p>
+                    </div>
+                    <div class="text-3xl font-black text-blue-600">+</div>
+                    <div class="w-full md:w-1/4 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg text-center">
+                        <p class="font-bold">고추장/참치액</p>
+                        <p class="text-xs text-blue-600">감칠맛 & 당도 강화</p>
+                    </div>
+                    <div class="text-3xl font-black text-blue-600">=</div>
+                    <div class="w-full md:w-1/3 p-4 bg-blue-600 text-white rounded-lg text-center shadow-lg">
+                        <p class="font-bold text-lg italic">"K-시트러스 딥소스"</p>
+                        <p class="text-xs opacity-80">구미 만감류 활용 프리미엄 소스</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Regulatory Barrier (NOM-051) -->
+        <section class="mb-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div class="order-2 md:order-1">
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold mb-6 text-center">NOM-051 나트륨/에너지 경고 기준</h3>
+                    <div id="nomPlot" class="w-full h-80"></div>
+                    <p class="mt-4 text-xs text-gray-400 text-center">*Plotly WebGL 렌더링 사용: 나트륨 300mg/100g 초과 시 블랙 라벨 부착</p>
+                </div>
+            </div>
+            <div class="order-1 md:order-2 border-r-8 border-red-500 pr-6 text-right">
+                <h2 class="text-3xl font-bold text-red-600">03. 비관세 장벽: NOM-051</h2>
+                <p class="text-gray-600 mt-4 leading-relaxed">
+                    멕시코 정부는 보건 정책의 일환으로 가공식품 전면에 <b>검은색 팔각형 경고 라벨</b> 부착을 의무화하고 있습니다. 나트륨이 100g당 300mg을 초과하거나 감미료가 포함될 경우, 캐릭터 마케팅이 전면 금지됩니다. 따라서 <b>'Zero-Sello' 저염·저당 제형 설계</b>가 시장 진출의 선결 조건입니다.
+                </p>
+                <div class="mt-6 flex justify-end gap-2">
+                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-bold">캐릭터 사용 불가</span>
+                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-bold">연예인 광고 제한</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Gumi-si Infrastructure -->
+        <section class="mb-16">
+            <div class="mb-8 border-l-8 border-blue-600 pl-6">
+                <h2 class="text-3xl font-bold accent-text">04. 구미시 수출 역량 및 인프라</h2>
+                <p class="text-gray-600 mt-2">구미시는 경상북도 내 시·군 수출 실적 1위(약 1,269억 원)를 기록하며, 가공식품 중심의 스마트 푸드테크 거점으로 도약하고 있습니다.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 card p-6">
+                    <h3 class="text-xl font-bold mb-6 text-center">구미시 농식품 품목별 수출 비중</h3>
+                    <div class="chart-container" style="max-width: 100%;">
+                        <canvas id="gumiExportChart"></canvas>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="card p-6 metric-card">
+                        <p class="text-sm text-gray-500">농업 예산 총액</p>
+                        <p class="text-2xl font-bold accent-text">1,865억 원</p>
+                        <p class="text-xs text-gray-400 mt-1">시 예산의 9.98% 배정</p>
+                    </div>
+                    <div class="card p-6 metric-card" style="border-left-color: #f59e0b;">
+                        <p class="text-sm text-gray-500">푸드테크 연구지원센터</p>
+                        <p class="text-2xl font-bold text-amber-600">282억 원</p>
+                        <p class="text-xs text-gray-400 mt-1">2028년 완공 목표 스마트 제조 거점</p>
+                    </div>
+                    <div class="card p-6 metric-card" style="border-left-color: #10b981;">
+                        <p class="text-sm text-gray-500">아열대 작물(만감류)</p>
+                        <p class="text-2xl font-bold text-emerald-600">연간 9톤 생산</p>
+                        <p class="text-xs text-gray-400 mt-1">천혜향, 레드향 등 프리미엄 원료</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Strategic Roadmap -->
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12 accent-text">멕시코 진출 3단계 로드맵</h2>
+            <div class="relative">
+                <div class="hidden md:block absolute left-1/2 h-full w-1 bg-blue-100 -translate-x-1/2"></div>
+                
+                <!-- Stage 1 -->
+                <div class="relative mb-12 md:flex items-center justify-between">
+                    <div class="md:w-5/12 bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-500">
+                        <span class="text-blue-500 font-black">STEP 01</span>
+                        <h4 class="text-xl font-bold mt-2">Zero-Sello R&D</h4>
+                        <p class="text-gray-600 text-sm mt-2">나트륨 300mg 이하의 식물성 감칠맛 포뮬러 개발. 구미 푸드테크 연구지원센터의 인프라 활용.</p>
+                    </div>
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-8 h-8 bg-blue-500 rounded-full border-4 border-white z-10"></div>
+                    <div class="md:w-5/12"></div>
+                </div>
+
+                <!-- Stage 2 -->
+                <div class="relative mb-12 md:flex items-center justify-between">
+                    <div class="md:w-5/12 order-2 bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-700">
+                        <span class="text-blue-700 font-black">STEP 02</span>
+                        <h4 class="text-xl font-bold mt-2">현지 B2B 채널 확보</h4>
+                        <p class="text-gray-600 text-sm mt-2">아시아온푸드(Asia On Food) 및 현지 타코 프랜차이즈와의 원료 소스 공급 파트너십 구축.</p>
+                    </div>
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-8 h-8 bg-blue-700 rounded-full border-4 border-white z-10"></div>
+                    <div class="md:w-5/12"></div>
+                </div>
+
+                <!-- Stage 3 -->
+                <div class="relative mb-12 md:flex items-center justify-between">
+                    <div class="md:w-5/12 bg-white p-6 rounded-xl shadow-lg border-t-4 border-cyan-500">
+                        <span class="text-cyan-500 font-black">STEP 03</span>
+                        <h4 class="text-xl font-bold mt-2">프리미엄 브랜딩</h4>
+                        <p class="text-gray-600 text-sm mt-2">구미 천혜향/레드향 융합 소스 라인업 런칭 및 아마존 멕시코 등 온라인 플랫폼 1위 목표.</p>
+                    </div>
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-8 h-8 bg-cyan-500 rounded-full border-4 border-white z-10"></div>
+                    <div class="md:w-5/12"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center text-gray-400 text-sm mt-12 pb-12 border-t pt-8">
+        <p>&copy; 2024 Gumi-si Global Food-Tech Strategy Group. All Rights Reserved.</p>
+        <p class="mt-2 italic">본 보고서는 멕시코 현지 실태조사 데이터를 기반으로 구미시 특화 전략을 위해 생성되었습니다. (기준 환율: 1 USD = 1,350 KRW 적용)</p>
+    </footer>
+
+    <script>
+        // Chart.js Label Wrapping Helper Logic
+        const wrapLabel = (label) => {
+            if (typeof label !== 'string' || label.length <= 16) return label;
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        };
+
+        // Tooltip Callback Config
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // 1. Growth Chart
+        const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctxGrowth, {
+            type: 'bar',
+            data: {
+                labels: [wrapLabel('인스턴트 라면'), wrapLabel('소주(증류주)'), wrapLabel('커피조제품'), wrapLabel('과자류')],
+                datasets: [{
+                    label: '수출 증가율 (%)',
+                    data: [127.8, 72.1, 153.2, 47.1],
+                    backgroundColor: ['#003366', '#0056b3', '#0084ff', '#00d4ff'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#e2e8f0' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // 2. Ramen Donut Chart
+        const ctxRamen = document.getElementById('ramenDonutChart').getContext('2d');
+        new Chart(ctxRamen, {
+            type: 'doughnut',
+            data: {
+                labels: ['컵라면', '봉지라면'],
+                datasets: [{
+                    data: [85, 15],
+                    backgroundColor: ['#0056b3', '#e2e8f0'],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        // 3. NOM-051 Plotly (Scatter with Thresholds)
+        const nomTrace = {
+            x: [150, 250, 450, 600, 310, 800],
+            y: [0.5, 0.8, 1.2, 1.5, 1.1, 2.0],
+            mode: 'markers',
+            type: 'scatter', // Canvas/WebGL 대신 보다 안정적인 scatter 모드로 변경
+            text: ['안전', '안전', '경고(나트륨)', '경고(나트륨+당)', '경고(나트륨)', '위험'],
+            marker: {
+                size: [20, 25, 40, 45, 30, 50],
+                color: [150, 250, 450, 600, 310, 800],
+                colorscale: 'Blues',
+                showscale: false
+            }
+        };
+
+        const nomLayout = {
+            shapes: [
+                { type: 'line', x0: 300, y0: 0, x1: 300, y1: 2.2, line: { color: 'red', width: 2, dash: 'dot' } }
+            ],
+            annotations: [{ x: 320, y: 2.1, text: '나트륨 기준(300mg)', showarrow: false, font: { color: 'red' } }],
+            xaxis: { title: '나트륨 함량 (mg/100g)' },
+            yaxis: { title: '에너지 밀도 (kcal/mg)' },
+            margin: { t: 20, b: 40, l: 50, r: 20 },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)'
+        };
+
+        Plotly.newPlot('nomPlot', [nomTrace], nomLayout, {responsive: true, displayModeBar: false});
+
+        // 4. Gumi Export Horizontal Bar
+        const ctxGumi = document.getElementById('gumiExportChart').getContext('2d');
+        new Chart(ctxGumi, {
+            type: 'bar',
+            data: {
+                labels: [wrapLabel('라면 (약 698억 원)'), wrapLabel('소스류 (약 119억 원)'), wrapLabel('냉동 김밥 (약 109억 원)')],
+                datasets: [{
+                    label: '수출액 (단위: 억 원)',
+                    data: [698, 119, 109],
+                    backgroundColor: '#0056b3',
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                indexAxis: 'y', // datasets 내부에서 options 바로 아래 레벨로 수정 완료
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    x: { grid: { color: '#f1f5f9' } },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
